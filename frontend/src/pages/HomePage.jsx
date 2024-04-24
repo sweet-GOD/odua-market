@@ -7,17 +7,22 @@ import FeaturedProduct from "../components/Route/FeaturedProduct/FeaturedProduct
 import Events from "../components/Events/Events";
 import Sponsored from "../components/Route/Sponsored";
 import Footer from "../components/Layout/Footer";
+import ShuffleHero from '../components/Route/Hero/Hero2';
 
 const HomePage = () => {
   return (
-    <div>
+    <div className='profilebg w-full'>
+      
+
         <Header activeHeading={1} />
-        <Hero />
+        {/* <Hero /> */}
+        <ShuffleHero />
+     
         <Categories />
         <BestDeals />
         <Events />
-        <FeaturedProduct />
-        <Sponsored />
+        {/* <FeaturedProduct /> */}
+        {/* <Sponsored /> */}
         <Footer />
     </div>
   )

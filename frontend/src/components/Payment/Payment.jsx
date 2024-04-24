@@ -15,6 +15,7 @@ import axios from "axios";
 import { server } from "../../server";
 import { toast } from "react-toastify";
 import { RxCross1 } from "react-icons/rx";
+import { PaystackButton } from "react-paystack";
 
 const Payment = () => {
   const [orderData, setOrderData] = useState([]);
@@ -23,11 +24,14 @@ const Payment = () => {
   const navigate = useNavigate();
   const stripe = useStripe();
   const elements = useElements();
+  const publicKey = "pk_test_4ac9f85b089c3b25edb8897d446ce3e9b30ee737";
 
   useEffect(() => {
     const orderData = JSON.parse(localStorage.getItem("latestOrder"));
     setOrderData(orderData);
   }, []);
+
+ 
 
   const createOrder = (data, actions) => {
     return actions.order
@@ -164,15 +168,15 @@ const Payment = () => {
     };
 
     await axios
-    .post(`${server}/order/create-order`, order, config)
-    .then((res) => {
-      setOpen(false);
-      navigate("/order/success");
-      toast.success("Order successful!");
-      localStorage.setItem("cartItems", JSON.stringify([]));
-      localStorage.setItem("latestOrder", JSON.stringify([]));
-      window.location.reload();
-    });
+      .post(`${server}/order/create-order`, order, config)
+      .then((res) => {
+        setOpen(false);
+        navigate("/order/success");
+        toast.success("Order successful!");
+        localStorage.setItem("cartItems", JSON.stringify([]));
+        localStorage.setItem("latestOrder", JSON.stringify([]));
+        window.location.reload();
+      });
   };
 
   return (
@@ -187,6 +191,7 @@ const Payment = () => {
             createOrder={createOrder}
             paymentHandler={paymentHandler}
             cashOnDeliveryHandler={cashOnDeliveryHandler}
+            totalPrice={orderData.totalPrice}
           />
         </div>
         <div className="w-full 800px:w-[35%] 800px:mt-0 mt-8">
@@ -205,8 +210,34 @@ const PaymentInfo = ({
   createOrder,
   paymentHandler,
   cashOnDeliveryHandler,
+  totalPrice,
 }) => {
   const [select, setSelect] = useState(1);
+  const navigate = useNavigate();
+  const publicKey = "pk_test_4ac9f85b089c3b25edb8897d446ce3e9b30ee737";
+
+  
+  const componentProps = {
+    email: user?.email,
+    amount: totalPrice * 100, // Amount in kobo (100 kobo = 1 naira)
+    metadata: {
+      name: user?.name,
+      // phone: user?.phoneNumber,
+    },
+    publicKey: publicKey, // Your Paystack public key
+    text: "Pay Now",
+    onSuccess: () => {
+      toast.success("Payment successful!");
+      navigate("/order/success");
+    },
+    onClose: () => toast.error("Payment was canceled"),
+  };
+
+  // Paystack payment close callback
+  const onClose = () => {
+    // Handle payment close
+    toast.error("Payment was canceled");
+  };
 
   return (
     <div className="w-full 800px:w-[95%] bg-[#fff] rounded-md p-5 pb-8">
@@ -222,7 +253,7 @@ const PaymentInfo = ({
             ) : null}
           </div>
           <h4 className="text-[18px] pl-2 font-[600] text-[#000000b1]">
-            Pay with Debit/credit card
+            Pay with Debit/Credit card
           </h4>
         </div>
 
@@ -236,8 +267,9 @@ const PaymentInfo = ({
                   <input
                     required
                     placeholder={user && user.name}
-                    className={`${styles.input} !w-[95%] text-[#444]`}
+                    className={`${styles.input} font-[19px] !w-[95%] text-[#444]`}
                     value={user && user.name}
+                    style={{ lineHeight: 1.5 }}
                   />
                 </div>
                 <div className="w-[50%]">
@@ -268,7 +300,7 @@ const PaymentInfo = ({
                 <div className="w-[50%]">
                   <label className="block pb-2">Card Number</label>
                   <CardNumberElement
-                    className={`${styles.input} !h-[35px] !w-[95%]`}
+                    className={`${styles.input}  !w-[95%]`}
                     options={{
                       style: {
                         base: {
@@ -290,7 +322,7 @@ const PaymentInfo = ({
                 <div className="w-[50%]">
                   <label className="block pb-2">CVV</label>
                   <CardCvcElement
-                    className={`${styles.input} !h-[35px]`}
+                    className={`${styles.input} `}
                     options={{
                       style: {
                         base: {
@@ -313,7 +345,7 @@ const PaymentInfo = ({
               <input
                 type="submit"
                 value="Submit"
-                className={`${styles.button} !bg-[#f63b60] text-[#fff] h-[45px] rounded-[5px] cursor-pointer text-[18px] font-[600]`}
+                className={`${styles.button} !bg-[#010101] w-full text-[#fff] h-[45px] rounded-[5px] cursor-pointer text-[18px] font-[600]`}
               />
             </form>
           </div>
@@ -341,7 +373,7 @@ const PaymentInfo = ({
         {select === 2 ? (
           <div className="w-full flex border-b">
             <div
-              className={`${styles.button} !bg-[#f63b60] text-white h-[45px] rounded-[5px] cursor-pointer text-[18px] font-[600]`}
+              className={`${styles.button} !bg-[#010101] w-full text-white h-[45px] rounded-[5px] cursor-pointer text-[18px] font-[600]`}
               onClick={() => setOpen(true)}
             >
               Pay Now
@@ -356,18 +388,18 @@ const PaymentInfo = ({
                       onClick={() => setOpen(false)}
                     />
                   </div>
-                    <PayPalScriptProvider
-                      options={{
-                        "client-id":
-                          "Aczac4Ry9_QA1t4c7TKH9UusH3RTe6onyICPoCToHG10kjlNdI-qwobbW9JAHzaRQwFMn2-k660853jn",
-                      }}
-                    >
-                      <PayPalButtons
-                        style={{ layout: "vertical" }}
-                        onApprove={onApprove}
-                        createOrder={createOrder}
-                      />
-                    </PayPalScriptProvider>
+                  <PayPalScriptProvider
+                    options={{
+                      "client-id":
+                        "Aczac4Ry9_QA1t4c7TKH9UusH3RTe6onyICPoCToHG10kjlNdI-qwobbW9JAHzaRQwFMn2-k660853jn",
+                    }}
+                  >
+                    <PayPalButtons
+                      style={{ layout: "vertical" }}
+                      onApprove={onApprove}
+                      createOrder={createOrder}
+                    />
+                  </PayPalScriptProvider>
                 </div>
               </div>
             )}
@@ -378,7 +410,7 @@ const PaymentInfo = ({
       <br />
       {/* cash on delivery */}
       <div>
-        <div className="flex w-full pb-5 border-b mb-2">
+        {/* <div className="flex w-full pb-5 border-b mb-2">
           <div
             className="w-[25px] h-[25px] rounded-full bg-transparent border-[3px] border-[#1d1a1ab4] relative flex items-center justify-center"
             onClick={() => setSelect(3)}
@@ -390,7 +422,7 @@ const PaymentInfo = ({
           <h4 className="text-[18px] pl-2 font-[600] text-[#000000b1]">
             Cash on Delivery
           </h4>
-        </div>
+        </div> */}
 
         {/* cash on delivery */}
         {select === 3 ? (
@@ -399,9 +431,41 @@ const PaymentInfo = ({
               <input
                 type="submit"
                 value="Confirm"
-                className={`${styles.button} !bg-[#f63b60] text-[#fff] h-[45px] rounded-[5px] cursor-pointer text-[18px] font-[600]`}
+                className={`${styles.button} !bg-[#010101] w-full text-[#fff] h-[45px] rounded-[5px] cursor-pointer text-[18px] font-[600]`}
               />
             </form>
+          </div>
+        ) : null}
+      </div>
+
+      {/* *********************** */}
+      <br />
+      {/* cash on delivery */}
+      <div>
+        <div className="flex w-full pb-5 border-b mb-2">
+          <div
+            className="w-[25px] h-[25px] rounded-full bg-transparent border-[3px] border-[#1d1a1ab4] relative flex items-center justify-center"
+            onClick={() => setSelect(4)}
+          >
+            {select === 4 ? (
+              <div className="w-[13px] h-[13px] bg-[#1d1a1acb] rounded-full" />
+            ) : null}
+          </div>
+          <h4 className="text-[18px] pl-2 font-[600] text-[#000000b1]">
+            Pay with Paystack
+          </h4>
+        </div>
+
+        {/* cash on delivery */}
+        {select === 4 ? (
+          <div className="w-full flex">
+            <PaystackButton
+              {...componentProps}
+              className={`${styles.button} !bg-[#010101] w-full text-white h-[45px] rounded-[5px] cursor-pointer text-[18px] font-[600]`}
+              
+            >
+              Checkout
+            </PaystackButton>
           </div>
         ) : null}
       </div>
@@ -414,22 +478,25 @@ const CartData = ({ orderData }) => {
   return (
     <div className="w-full bg-[#fff] rounded-md p-5 pb-8">
       <div className="flex justify-between">
-        <h3 className="text-[16px] font-[400] text-[#000000a4]">subtotal:</h3>
-        <h5 className="text-[18px] font-[600]">${orderData?.subTotalPrice}</h5>
+        <h3 className="text-[16px] font-[400] text-[#010101]">Subtotal:</h3>
+        <h5 className="text-[18px] font-[600]">₦ {orderData?.subTotalPrice}</h5>
       </div>
       <br />
       <div className="flex justify-between">
-        <h3 className="text-[16px] font-[400] text-[#000000a4]">shipping:</h3>
-        <h5 className="text-[18px] font-[600]">${shipping}</h5>
+        <h3 className="text-[16px] font-[400] text-[#010101]">Shipping:</h3>
+        <h5 className="text-[18px] font-[600]">₦ {shipping}</h5>
       </div>
       <br />
       <div className="flex justify-between border-b pb-3">
-        <h3 className="text-[16px] font-[400] text-[#000000a4]">Discount:</h3>
-        <h5 className="text-[18px] font-[600]">{orderData?.discountPrice? "$" + orderData.discountPrice : "-"}</h5>
+        <h3 className="text-[16px] font-[400] text-[#010101]">Discount:</h3>
+        <h5 className="text-[18px] font-[600]">
+          {orderData?.discountPrice ? "$" + orderData.discountPrice : "-"}
+        </h5>
       </div>
-      <h5 className="text-[18px] font-[600] text-end pt-3">
-        ${orderData?.totalPrice}
-      </h5>
+      <div className="flex justify-between pt-3">
+        <h3 className="text-[16px] font-[400] text-[#010101]">Total:</h3>
+        <h5 className="text-[18px] font-[600] ">₦ {orderData?.totalPrice}</h5>
+      </div>
       <br />
     </div>
   );

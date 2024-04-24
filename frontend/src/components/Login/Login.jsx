@@ -11,9 +11,11 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
 
     await axios
       .post(
@@ -25,24 +27,27 @@ const Login = () => {
         { withCredentials: true }
       )
       .then((res) => {
+        setLoading(false)
         toast.success("Login Success!");
         navigate("/");
         window.location.reload(true); 
       })
       .catch((err) => {
+        setLoading(false)
         toast.error(err.response.data.message);
       });
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="md:h-screen h-[80vh] md:w-[50%] profilebg flex flex-col justify-start md:justify-center py-12 sm:px-6 lg:px-8">
+      
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          Login to your account
+        <h2 className="mt-6 text-center text-3xl font-bold text-[#010101]">
+          Log in to your account
         </h2>
       </div>
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      <div className="mt-8 sm:mx-auto  p-4 md:p-0 sm:w-full sm:max-w-lg">
+        <div className="bg-white rounded overflow-hidden py-8 px-4 shadow-md  sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label
@@ -101,7 +106,7 @@ const Login = () => {
                   type="checkbox"
                   name="remember-me"
                   id="remember-me"
-                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  className="h-4 w-4 text-[#010101] focus:ring-[#010101] border-gray-300 rounded"
                 />
                 <label
                   htmlFor="remember-me"
@@ -113,7 +118,7 @@ const Login = () => {
               <div className="text-sm">
                 <a
                   href=".forgot-password"
-                  className="font-medium text-blue-600 hover:text-blue-500"
+                  className=" text-[#000] font-semibold hover:text-[#327e55]"
                 >
                   Forgot your password?
                 </a>
@@ -122,14 +127,15 @@ const Login = () => {
             <div>
               <button
                 type="submit"
-                className="group relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
-              >
-                Submit
+                className="group relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#010101] hover:opacity-80"
+              >{loading ? <span class="loading loading-dots loading-md"></span> : 
+                "Log In"
+              }
               </button>
             </div>
             <div className={`${styles.noramlFlex} w-full`}>
-              <h4>Not have any account?</h4>
-              <Link to="/sign-up" className="text-blue-600 pl-2">
+              <h4>Don't have an account?</h4>
+              <Link to="/sign-up" className="text-[#000] font-semibold pl-2">
                 Sign Up
               </Link>
             </div>

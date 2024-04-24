@@ -10,32 +10,32 @@ const Ratings = ({ rating }) => {
       stars.push(
         <AiFillStar
           key={i}
-          size={20}
+          size={18}
           color="#f6b100"
-          className="mr-2 cursor-pointer"
+          className="mr-1 cursor-pointer"
         />
       );
     } else if (i === Math.ceil(rating) && !Number.isInteger(rating)) {
       stars.push(
         <BsStarHalf
           key={i}
-          size={17}
-          color="#f6ba00"
-          className="mr-2 cursor-pointer"
+          size={15}
+          color="#f6b100"
+          className="mr-1 cursor-pointer"
         />
       );
     } else {
       stars.push(
         <AiOutlineStar
           key={i}
-          size={20}
-          color="#f6ba00"
-          className="mr-2 cursor-pointer"
+          size={18}
+          color="#f6b100"
+          className="mr-1 cursor-pointer"
         />
       );
     }
   }
-  return <div className="flex"> {stars}</div>;
+  return <div className="flex mb-3"> {stars}</div>;
 };
 
 export default Ratings;

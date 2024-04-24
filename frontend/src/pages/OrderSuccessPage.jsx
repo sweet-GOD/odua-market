@@ -16,7 +16,7 @@ const OrderSuccessPage = () => {
 
 const Success = () => {
   const defaultOptions = {
-    loop: false,
+    loop: true,
     autoplay: true,
     animationData: animationData,
     rendererSettings: {
@@ -24,10 +24,10 @@ const Success = () => {
     },
   };
   return (
-    <div>
+    <div className="h-screen bg-white w-full flex items-center justify-center flex-col">
       <Lottie options={defaultOptions} width={300} height={300} />
-      <h5 className="text-center mb-14 text-[25px] text-[#000000a1]">
-        Your order is successful 😍
+      <h5 className="text-center mx-10 mb-52 text-[25px] text-[#010101]">
+        Your order has been placed successfully!
       </h5>
       <br />
       <br />

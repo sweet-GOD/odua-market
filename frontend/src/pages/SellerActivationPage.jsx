@@ -35,12 +35,16 @@ const SellerActivationPage = () => {
         justifyContent: "center",
         alignItems: "center",
       }}
+      className="profilebg"
     >
+      <div className="bg-white p-4 rounded shadow-md">
+
       {error ? (
         <p>Your token is expired!</p>
       ) : (
         <p>Your account has been created suceessfully!</p>
       )}
+      </div>
     </div>
   );
 };

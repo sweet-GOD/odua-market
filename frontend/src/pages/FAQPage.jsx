@@ -5,7 +5,7 @@ import styles from "../styles/styles";
 
 const FAQPage = () => {
   return (
-    <div>
+    <div className="profilebg">
       <Header activeHeading={5} />
       <Faq />
       <Footer />
@@ -25,7 +25,7 @@ const Faq = () => {
   };
 
   return (
-    <div className={`${styles.section} my-8`}>
+    <div className={`${styles.section} md:pt-0 pt-14 800px:my-4 p-4 bg-white rounded overflow-hidden shadow`}>
       <h2 className="text-3xl font-bold text-gray-900 mb-8">FAQ</h2>
       <div className="mx-auto space-y-4">
         {/* single Faq */}
@@ -35,7 +35,7 @@ const Faq = () => {
             className="flex items-center justify-between w-full"
             onClick={() => toggleTab(2)}
           >
-            <span className="text-lg font-medium text-gray-900">
+            <span className="text-lg text-start font-medium text-gray-900">
               What is your return policy?
             </span>
             {activeTab === 2 ? (
@@ -85,7 +85,7 @@ const Faq = () => {
             className="flex items-center justify-between w-full"
             onClick={() => toggleTab(3)}
           >
-            <span className="text-lg font-medium text-gray-900">
+            <span className="text-lg text-start font-medium text-gray-900">
               How do I track my order?
             </span>
             {activeTab === 3 ? (
@@ -134,7 +134,7 @@ const Faq = () => {
             className="flex items-center justify-between w-full"
             onClick={() => toggleTab(4)}
           >
-            <span className="text-lg font-medium text-gray-900">
+            <span className="text-lg text-start font-medium text-gray-900">
               How do I contact customer support?
             </span>
             {activeTab === 4 ? (
@@ -183,7 +183,7 @@ const Faq = () => {
             className="flex items-center justify-between w-full"
             onClick={() => toggleTab(5)}
           >
-            <span className="text-lg font-medium text-gray-900">
+            <span className="text-lg text-start font-medium text-gray-900">
               Can I change or cancel my order?
             </span>
             {activeTab === 5 ? (
@@ -233,7 +233,7 @@ const Faq = () => {
             className="flex items-center justify-between w-full"
             onClick={() => toggleTab(6)}
           >
-            <span className="text-lg font-medium text-gray-900">
+            <span className="text-lg text-start font-medium text-gray-900">
               Do you offer international shipping?
             </span>
             {activeTab === 6 ? (
@@ -269,7 +269,7 @@ const Faq = () => {
           {activeTab === 6 && (
             <div className="mt-4">
               <p className="text-base text-gray-500">
-                Currently, we only offer shipping within the United States.
+                Currently, we only offer shipping within Nigeria.
               </p>
             </div>
           )}
@@ -280,7 +280,7 @@ const Faq = () => {
             className="flex items-center justify-between w-full"
             onClick={() => toggleTab(7)}
           >
-            <span className="text-lg font-medium text-gray-900">
+            <span className="text-lg text-start font-medium text-gray-900">
               What payment methods do you accept?
             </span>
             {activeTab === 7 ? (
@@ -316,12 +316,232 @@ const Faq = () => {
           {activeTab === 7 && (
             <div className="mt-4">
               <p className="text-base text-gray-500">
-                We accept visa,mastercard,paypal payment method also we have
-                cash on delivery system.
+                We accept visa, mastercard, bank transfer payment method.
               </p>
             </div>
           )}
         </div>
+
+        <div className="border-b border-gray-200 pb-4">
+          <button
+            className="flex items-center justify-between w-full"
+            onClick={() => toggleTab(8)}
+          >
+            <span className="text-lg text-start font-medium text-gray-900">
+              How do I become a seller on the website?
+            </span>
+            {activeTab === 8 ? (
+              <svg
+                className="h-6 w-6 text-gray-500"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            ) : (
+              <svg
+                className="h-6 w-6 text-gray-500"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            )}
+          </button>
+          {activeTab === 8 && (
+            <div className="mt-4">
+              <p className="text-base text-gray-500">
+                To become a seller, you typically need to register a seller
+                account on the platform.
+              </p>
+              <p className="text-base text-gray-500">
+                Once registered, you can set up your storefront, list your
+                products or services, and start selling.
+              </p>
+            </div>
+          )}
+        </div>
+
+        <div className="border-b border-gray-200 pb-4">
+          <button
+            className="flex items-center justify-between w-full"
+            onClick={() => toggleTab(9)}
+          >
+            <span className="text-lg text-start font-medium text-gray-900">
+              How are payments processed on the platform?
+            </span>
+            {activeTab === 9 ? (
+              <svg
+                className="h-6 w-6 text-gray-500"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            ) : (
+              <svg
+                className="h-6 w-6 text-gray-500"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            )}
+          </button>
+          {activeTab === 9 && (
+            <div className="mt-4">
+              <p className="text-base text-gray-500">
+                The platform usually facilitates transactions through various
+                payment gateways.
+              </p>
+              <p className="text-base text-gray-500">
+                When a buyer makes a purchase, the payment is processed
+                securely, and the platform may hold the funds until the product
+                is delivered successfully.
+              </p>
+              <p className="text-base text-gray-500">
+                Once the buyer confirms authenticity and receipt of the product,
+                the funds are released to the seller, minus transaction fees.
+              </p>
+            </div>
+          )}
+        </div>
+
+        <div className="border-b border-gray-200 pb-4">
+          <button
+            className="flex items-center justify-between w-full"
+            onClick={() => toggleTab(10)}
+          >
+            <span className="text-lg text-start font-medium text-gray-900">
+              What measures are in place to ensure trust and safety for buyers
+              and sellers?
+            </span>
+            {activeTab === 10 ? (
+              <svg
+                className="h-6 w-6 text-gray-500"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            ) : (
+              <svg
+                className="h-6 w-6 text-gray-500"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            )}
+          </button>
+          {activeTab === 10 && (
+            <div className="mt-4">
+              <p className="text-base text-gray-500">
+                The platform may implement verification processes for sellers to
+                ensure they are legitimate.
+              </p>
+              <p className="text-base text-gray-500">
+                Reviews and ratings from previous buyers can help establish
+                trustworthiness.
+              </p>
+              <p className="text-base text-gray-500">
+                Dispute resolution mechanisms may be in place to handle any
+                conflicts between buyers and sellers.
+              </p>
+            </div>
+          )}
+        </div>
+
+        <div className="border-b border-gray-200 pb-4">
+          <button
+            className="flex items-center justify-between w-full"
+            onClick={() => toggleTab(11)}
+          >
+            <span className="text-lg text-start font-medium text-gray-900">
+              Is customer support available for assistance?
+            </span>
+            {activeTab === 11 ? (
+              <svg
+                className="h-6 w-6 text-gray-500"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            ) : (
+              <svg
+                className="h-6 w-6 text-gray-500"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            )}
+          </button>
+          {activeTab === 11 && (
+            <div className="mt-4">
+              <p className="text-base text-gray-500">
+                Yes, the platform usually offer customer support to address any
+                inquiries, concerns, or technical issues that buyers or sellers
+                may encounter.
+              </p>
+              <p className="text-base text-gray-500">
+                Support channels may include email, live chat, or a help center
+                with FAQs and guides.
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* **************** */}
       </div>
     </div>
   );

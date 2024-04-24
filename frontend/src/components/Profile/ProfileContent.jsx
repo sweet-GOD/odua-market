@@ -77,18 +77,18 @@ const ProfileContent = ({ active }) => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full md:gap-4 flex flex-col md:flex-row bg-white md:p-16 p-4 rounded shadow-lg">
       {/* profile */}
       {active === 1 && (
         <>
           <div className="flex justify-center w-full">
-            <div className="relative">
+            <div className="relative ">
               <img
                 src={`${user?.avatar?.url}`}
-                className="w-[150px] h-[150px] rounded-full object-cover border-[3px] border-[#3ad132]"
+                className="w-full h-full rounded object-cover shadow"
                 alt=""
               />
-              <div className="w-[30px] h-[30px] bg-[#E3E9EE] rounded-full flex items-center justify-center cursor-pointer absolute bottom-[5px] right-[5px]">
+              <div className="w-[48px] h-[48px] bg-[#fff] rounded-full flex items-center justify-center cursor-pointer absolute shadow-xl top-[10px] left-[10px]">
                 <input
                   type="file"
                   id="image"
@@ -96,31 +96,31 @@ const ProfileContent = ({ active }) => {
                   onChange={handleImage}
                 />
                 <label htmlFor="image">
-                  <AiOutlineCamera />
+                  <AiOutlineCamera size={24} />
                 </label>
               </div>
             </div>
           </div>
           <br />
           <br />
-          <div className="w-full px-5">
+          <div className="w-full px-4">
             <form onSubmit={handleSubmit} aria-required={true}>
-              <div className="w-full 800px:flex block pb-3">
-                <div className=" w-[100%] 800px:w-[50%]">
+              <div className="w-full 800px:flex flex-col gap-8 block pb-3 800px:mb-2">
+                <div className=" w-[100%] ">
                   <label className="block pb-2">Full Name</label>
                   <input
                     type="text"
-                    className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
+                    className={`${styles.input} w-full rounded p-4  mb-4 800px:mb-0`}
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                   />
                 </div>
-                <div className=" w-[100%] 800px:w-[50%]">
+                <div className=" w-[100%] ">
                   <label className="block pb-2">Email Address</label>
                   <input
                     type="text"
-                    className={`${styles.input} !w-[95%] mb-1 800px:mb-0`}
+                    className={`${styles.input} w-full rounded p-4  mb-1 800px:mb-0`}
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -128,35 +128,39 @@ const ProfileContent = ({ active }) => {
                 </div>
               </div>
 
-              <div className="w-full 800px:flex block pb-3">
-                <div className=" w-[100%] 800px:w-[50%]">
+              <div className="w-full 800px:flex flex-col gap-8 block pb-2 800px:mb-0">
+                <div className=" w-[100%] ">
                   <label className="block pb-2">Phone Number</label>
                   <input
                     type="number"
-                    className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
+                    className={`${styles.input} w-full rounded p-4  mb-4 800px:mb-0`}
                     required
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
                   />
                 </div>
 
-                <div className=" w-[100%] 800px:w-[50%]">
-                  <label className="block pb-2">Enter your password</label>
+                <div className=" w-[100%] ">
+                  <label className="block pb-2">
+                    Enter your password <span className="text-red-500">*</span>
+                  </label>
                   <input
                     type="password"
-                    className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
+                    className={`${styles.input} w-full rounded p-4  mb-4 800px:mb-0`}
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
               </div>
-              <input
-                className={`w-[250px] h-[40px] border border-[#3a24db] text-center text-[#3a24db] rounded-[3px] mt-8 cursor-pointer`}
-                required
-                value="Update"
-                type="submit"
-              />
+              <div className="w-full  flex items-center justify-center">
+                <input
+                  className={`btn w-full mx-auto h-[40px] bg-[#010101] hover:bg-[#010101] hover:opacity-90 border-0 text-center text-white rounded mt-4 800px:mt-4 cursor-pointer`}
+                  required
+                  value="Update Profile"
+                  type="submit"
+                />
+              </div>
             </form>
           </div>
         </>
@@ -273,14 +277,24 @@ const AllOrders = () => {
     });
 
   return (
-    <div className="pl-8 pt-1">
-      <DataGrid
+    <div className="pt-1">
+      {orders &&
+        orders.map((item) => (
+          <div>
+            <div>
+              <h1>{item.totalPrice}</h1>
+              {/* <img src={item.images[0].url} alt="" /> */}
+            </div>
+          </div>
+        ))}
+      {/* <DataGrid
         rows={row}
         columns={columns}
-        pageSize={10}
+        pageSize={100}
         disableSelectionOnClick
         autoHeight
-      />
+        className=""
+      /> */}
     </div>
   );
 };
@@ -458,7 +472,7 @@ const TrackOrder = () => {
   );
 };
 
-const ChangePassword = () => {
+export const ChangePassword = () => {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -497,7 +511,7 @@ const ChangePassword = () => {
             <label className="block pb-2">Enter your old password</label>
             <input
               type="password"
-              className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
+              className={`${styles.input} w-full mb-4 800px:mb-0`}
               required
               value={oldPassword}
               onChange={(e) => setOldPassword(e.target.value)}
@@ -535,7 +549,7 @@ const ChangePassword = () => {
   );
 };
 
-const Address = () => {
+export const Address = () => {
   const [open, setOpen] = useState(false);
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");

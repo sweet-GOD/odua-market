@@ -19,8 +19,11 @@ import { useEffect } from "react";
 import { addTocart } from "../../../redux/actions/cart";
 import { toast } from "react-toastify";
 import Ratings from "../../Products/Ratings";
+import { BsCartPlus } from "react-icons/bs";
+import { IoOpenOutline } from "react-icons/io5";
+import { formatPrice } from "../../../static/data";
 
-const ProductCard = ({ data,isEvent }) => {
+const ProductCard = ({ data, isEvent }) => {
   const { wishlist } = useSelector((state) => state.wishlist);
   const { cart } = useSelector((state) => state.cart);
   const [click, setClick] = useState(false);
@@ -62,79 +65,143 @@ const ProductCard = ({ data,isEvent }) => {
 
   return (
     <>
-      <div className="w-full h-[370px] bg-white rounded-lg shadow-sm p-3 relative cursor-pointer">
-        <div className="flex justify-end"></div>
-        <Link to={`${isEvent === true ? `/product/${data._id}?isEvent=true` : `/product/${data._id}`}`}>
-          <img
-            src={`${data.images && data.images[0]?.url}`}
-            alt=""
-            className="w-full h-[170px] object-contain"
-          />
-        </Link>
-        <Link to={`/shop/preview/${data?.shop._id}`}>
-          <h5 className={`${styles.shop_name}`}>{data.shop.name}</h5>
-        </Link>
-        <Link to={`${isEvent === true ? `/product/${data._id}?isEvent=true` : `/product/${data._id}`}`}>
-          <h4 className="pb-3 font-[500]">
-            {data.name.length > 40 ? data.name.slice(0, 40) + "..." : data.name}
-          </h4>
+      <div className="w-full rounded bg-white shadow overflow-hidden md:shadow-xl pb-4 relative cursor-pointer">
+        <div className="flex justify-start items-center px-2 pt-3 gap-2 border-b">
+          <Link
+            to={`/shop/preview/${data?.shop._id}`}
+            className="flex  justify-center items-center"
+          >
+            <img
+              className="avatar rounded-full w-8 h-8 mb-3 mr-2"
+              src={data?.shop.avatar.url}
+              alt=""
+            />
+            <h5 className={`${styles.shop_name} text-green-600 pb-3 font-medium`}>
+              {data.shop.name}
+            </h5>
+          </Link>
+        </div>
+        <h5
+          className={`${styles.shop_name} absolute text-white top-[20%] left-[20%] opacity-20 text-[64px] pb-3`}
+        >
+          {data.shop.name}
+        </h5>
+        <div className="relative border-b">
+          <Link
+            to={`${
+              isEvent === true
+                ? `/product/${data._id}?isEvent=true`
+                : `/product/${data._id}`
+            }`}
+          >
+            <img
+              src={`${data.images && data.images[0]?.url}`}
+              alt=""
+              className="w-full h-80 md:h-72 object-cover "
+            />
+          </Link>
 
-          <div className="flex">
-          <Ratings rating={data?.ratings} />
+          <div className="absolute bottom-2 left-2 ">
+            <Ratings rating={data?.ratings} />
           </div>
 
-          <div className="py-2 flex items-center justify-between">
-            <div className="flex">
-              <h5 className={`${styles.productDiscountPrice}`}>
+          <span className="font-[400] badge absolute bottom-2 right-2 p-4 backdrop-blur-2xl text-[14px] text-[#010101]">
+            {data?.stock} in stock
+          </span>
+        </div>
+
+        <div className="px-2 pt-4">
+          <Link
+            to={`${
+              isEvent === true
+                ? `/product/${data._id}?isEvent=true`
+                : `/product/${data._id}`
+            }`}
+          >
+            <h4 className="pt-2 text-[#010101] text-md px-2 font-[700] hover:opacity-70 ">
+              {data.name.length > 35
+                ? data.name.slice(0, 35) + "..."
+                : data.name}
+            </h4>
+          </Link>
+
+          <div className="p-2 my-2">
+            <div className="flex items-center justify-between">
+              {/* <h5 className={`${styles.productDiscountPrice} text-xl`}>
+                ₦ {" "}
                 {data.originalPrice === 0
-                  ? data.originalPrice
-                  : data.discountPrice}
-                $
-              </h5>
-              <h4 className={`${styles.price}`}>
-                {data.originalPrice ? data.originalPrice + " $" : null}
-              </h4>
-            </div>
-            <span className="font-[400] text-[17px] text-[#68d284]">
-              {data?.sold_out} sold
-            </span>
-          </div>
-        </Link>
+                  ? formatPrice(data.originalPrice)
+                  : formatPrice(data.discountPrice)}
+              </h5> */}
 
-        {/* side options */}
-        <div>
-          {click ? (
-            <AiFillHeart
-              size={22}
-              className="cursor-pointer absolute right-2 top-5"
-              onClick={() => removeFromWishlistHandler(data)}
-              color={click ? "red" : "#333"}
-              title="Remove from wishlist"
-            />
-          ) : (
-            <AiOutlineHeart
-              size={22}
-              className="cursor-pointer absolute right-2 top-5"
-              onClick={() => addToWishlistHandler(data)}
-              color={click ? "red" : "#333"}
-              title="Add to wishlist"
-            />
-          )}
-          <AiOutlineEye
-            size={22}
-            className="cursor-pointer absolute right-2 top-14"
-            onClick={() => setOpen(!open)}
-            color="#333"
-            title="Quick view"
-          />
-          <AiOutlineShoppingCart
-            size={25}
-            className="cursor-pointer absolute right-2 top-24"
-            onClick={() => addToCartHandler(data._id)}
-            color="#444"
-            title="Add to cart"
-          />
-          {open ? <ProductDetailsCard setOpen={setOpen} data={data} /> : null}
+              <h4 className={`${styles.productDiscountPrice}`}>
+                {data.originalPrice
+                  ? "₦" + formatPrice(data.originalPrice)
+                  : null}
+              </h4>
+
+              {/* side options */}
+              <div className="flex gap-2">
+                {click ? (
+                  <AiFillHeart
+                    size={24}
+                    className="cursor-pointer  "
+                    onClick={() => removeFromWishlistHandler(data)}
+                    color={click ? "red" : "#010101"}
+                    title="Remove from wishlist"
+                  />
+                ) : (
+                  <AiOutlineHeart
+                    size={24}
+                    className="cursor-pointer  "
+                    onClick={() => addToWishlistHandler(data)}
+                    color={click ? "red" : "#010101"}
+                    title="Add to wishlist"
+                  />
+                )}
+
+                <IoOpenOutline
+                  size={24}
+                  className="cursor-pointer  "
+                  onClick={() => setOpen(!open)}
+                  color="#010101"
+                  title="Quick view"
+                />
+                {open ? (
+                  <ProductDetailsCard setOpen={setOpen} data={data} />
+                ) : null}
+              </div>
+            </div>
+          </div>
+
+          <button className="w-full  overflow-hidden">
+            {data?.stock > 0 ? (
+              <div
+                className="btn w-full hover:bg-[#333] rounded text-white bg-[#010101] cursor-pointer flex items-center justify-center"
+                onClick={() => addToCartHandler(data._id)}
+              >
+                Add to Cart
+                <BsCartPlus
+                  size={18}
+                  color="#fff"
+                  // title="Add to cart"
+                />
+              </div>
+            ) : (
+              <div
+                onClick={() => toast.error("Product Out of Stock!")}
+                className="btn w-full text-white bg-[#ccc] cursor-pointer flex rounded items-center justify-center "
+              >
+                Out of Stock
+              </div>
+            )}
+          </button>
+
+          <div className="flex justify-between px-2 ">
+            {/* <span className="font-[400] text-[14px] text-[#666]">
+              {data?.sold_out} sold
+            </span> */}
+          </div>
         </div>
       </div>
     </>

@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addTocart, removeFromCart } from "../../redux/actions/cart";
 import { toast } from "react-toastify";
+import { formatPrice } from "../../static/data";
 
 const Cart = ({ setOpenCart }) => {
   const { cart } = useSelector((state) => state.cart);
@@ -17,7 +18,7 @@ const Cart = ({ setOpenCart }) => {
   };
 
   const totalPrice = cart.reduce(
-    (acc, item) => acc + item.qty * item.discountPrice,
+    (acc, item) => acc + item.qty * item.originalPrice,
     0
   );
 
@@ -26,8 +27,8 @@ const Cart = ({ setOpenCart }) => {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full bg-[#0000004b] h-screen z-10">
-      <div className="fixed top-0 right-0 h-full w-[80%] 800px:w-[25%] bg-white flex flex-col overflow-y-scroll justify-between shadow-sm">
+    <div className="fixed top-0 left-0 w-full bg-[#0000004b] h-screen" style={{zIndex: 99}}>
+      <div className="fixed top-0 right-0 h-screen w-[80%] 800px:w-[25%] bg-white flex flex-col overflow-y-scroll justify-between shadow-sm">
         {cart && cart.length === 0 ? (
           <div className="w-full h-screen flex items-center justify-center">
             <div className="flex w-full justify-end pt-5 pr-5 fixed top-3 right-3">
@@ -76,10 +77,10 @@ const Cart = ({ setOpenCart }) => {
               {/* checkout buttons */}
               <Link to="/checkout">
                 <div
-                  className={`h-[45px] flex items-center justify-center w-[100%] bg-[#e44343] rounded-[5px]`}
+                  className={`h-[45px] flex items-center justify-center w-[100%] bg-[#111] rounded-[5px]`}
                 >
                   <h1 className="text-[#fff] text-[18px] font-[600]">
-                    Checkout Now (USD${totalPrice})
+                    Checkout (₦ {formatPrice(totalPrice) })
                   </h1>
                 </div>
               </Link>
@@ -93,10 +94,10 @@ const Cart = ({ setOpenCart }) => {
 
 const CartSingle = ({ data, quantityChangeHandler, removeFromCartHandler }) => {
   const [value, setValue] = useState(data.qty);
-  const totalPrice = data.discountPrice * value;
+  const totalPrice = data.originalPrice * value;
 
   const increment = (data) => {
-    if (data.stock < value) {
+    if (data.stock <= value) {
       toast.error("Product stock limited!");
     } else {
       setValue(value + 1);
@@ -116,7 +117,7 @@ const CartSingle = ({ data, quantityChangeHandler, removeFromCartHandler }) => {
       <div className="w-full flex items-center">
         <div>
           <div
-            className={`bg-[#e44343] border border-[#e4434373] rounded-full w-[25px] h-[25px] ${styles.noramlFlex} justify-center cursor-pointer`}
+            className={`bg-[#111] border  rounded-full w-[25px] h-[25px] ${styles.noramlFlex} justify-center cursor-pointer`}
             onClick={() => increment(data)}
           >
             <HiPlus size={18} color="#fff" />
@@ -134,17 +135,17 @@ const CartSingle = ({ data, quantityChangeHandler, removeFromCartHandler }) => {
           alt=""
           className="w-[130px] h-min ml-2 mr-2 rounded-[5px]"
         />
-        <div className="pl-[5px]">
-          <h1>{data.name}</h1>
-          <h4 className="font-[400] text-[15px] text-[#00000082]">
-            ${data.discountPrice} * {value}
-          </h4>
-          <h4 className="font-[600] text-[17px] pt-[3px] text-[#d02222] font-Roboto">
-            US${totalPrice}
+        <div className="px-[5px] w-7/12">
+          <h1>{data.name.length > 20 ? data.name.slice(0,20) + "...": data.name}</h1>
+          {/* <h4 className="font-[400] text-[15px] text-[#00000082]">
+          ₦ {formatPrice(data.discountPrice)} * {value}
+          </h4> */}
+          <h4 className="font-[600] text-[17px] pt-[3px] text-[#111] font-Roboto">
+          ₦ {formatPrice(totalPrice)}
           </h4>
         </div>
         <RxCross1
-          className="cursor-pointer"
+          className="cursor-pointer" size={20}
           onClick={() => removeFromCartHandler(data)}
         />
       </div>

@@ -13,17 +13,18 @@ const Events = () => {
         <div className={`${styles.section}`}>
       <div className={`${styles.heading}`}>
         <h1>Popular Events</h1>
+        <div className="bg-[#FF1E00] w-12 h-[2px] mt-2 text-center"></div>
       </div>
 
-      <div className="w-full grid">
+      <div className="w-full grid p-2">
          {
           allEvents.length !== 0 && (
             <EventCard data={allEvents && allEvents[0]} />
           )
          }
-         <h4>{
+         <h4 className='p-4'>{
            allEvents?.length === 0 && (
-            'No Events have!'
+            'No Events yet!'
            )
           }
 

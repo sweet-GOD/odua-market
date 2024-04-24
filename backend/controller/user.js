@@ -35,7 +35,8 @@ router.post("/create-user", async (req, res, next) => {
 
     const activationToken = createActivationToken(user);
 
-    const activationUrl = `https://eshop-tutorial-pyri.vercel.app/activation/${activationToken}`;
+    // const activationUrl = `https://eshop-tutorial-pyri.vercel.app/activation/${activationToken}`;
+    const activationUrl = `http://localhost:3000/activation/${activationToken}`;
 
     try {
       await sendMail({
@@ -225,7 +226,7 @@ router.put(
 
         const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
           folder: "avatars",
-          width: 150,
+          width: 1000,
         });
 
         existsUser.avatar = {

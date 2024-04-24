@@ -18,10 +18,12 @@ const CreateProduct = () => {
   const [category, setCategory] = useState("");
   const [tags, setTags] = useState("");
   const [originalPrice, setOriginalPrice] = useState();
-  const [discountPrice, setDiscountPrice] = useState();
+  // const [discountPrice, setDiscountPrice] = useState();
   const [stock, setStock] = useState();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(false)
     if (error) {
       toast.error(error);
     }
@@ -51,6 +53,7 @@ const CreateProduct = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true)
 
     const newForm = new FormData();
 
@@ -62,7 +65,7 @@ const CreateProduct = () => {
     newForm.append("category", category);
     newForm.append("tags", tags);
     newForm.append("originalPrice", originalPrice);
-    newForm.append("discountPrice", discountPrice);
+    // newForm.append("discountPrice", discountPrice);
     newForm.append("stock", stock);
     newForm.append("shopId", seller._id);
     dispatch(
@@ -72,7 +75,7 @@ const CreateProduct = () => {
         category,
         tags,
         originalPrice,
-        discountPrice,
+        // discountPrice,
         stock,
         shopId: seller._id,
         images,
@@ -149,7 +152,7 @@ const CreateProduct = () => {
         </div>
         <br />
         <div>
-          <label className="pb-2">Original Price</label>
+          <label className="pb-2">Price</label>
           <input
             type="number"
             name="price"
@@ -159,7 +162,7 @@ const CreateProduct = () => {
             placeholder="Enter your product price..."
           />
         </div>
-        <br />
+        {/* <br />
         <div>
           <label className="pb-2">
             Price (With Discount) <span className="text-red-500">*</span>
@@ -172,7 +175,7 @@ const CreateProduct = () => {
             onChange={(e) => setDiscountPrice(e.target.value)}
             placeholder="Enter your product price with discount..."
           />
-        </div>
+        </div> */}
         <br />
         <div>
           <label className="pb-2">
@@ -218,7 +221,7 @@ const CreateProduct = () => {
           <div>
             <input
               type="submit"
-              value="Create"
+              value={loading ? "Creating..." : "Create"}
               className="mt-2 cursor-pointer appearance-none text-center block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             />
           </div>

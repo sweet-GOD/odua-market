@@ -10,12 +10,12 @@ const DropDown = ({ categoriesData, setDropDown }) => {
     window.location.reload();
   };
   return (
-    <div className="pb-4 w-[270px] bg-[#fff] absolute z-30 rounded-b-md shadow-sm">
+    <div className="pb-4 w-[320px] p-2 backdrop-blur-xl mt-8 absolute z-30 rounded-xl shadow-2xl">
       {categoriesData &&
         categoriesData.map((i, index) => (
           <div
             key={index}
-            className={`${styles.noramlFlex}`}
+            className={`${styles.noramlFlex} hover:bg-white rounded-xl`}
             onClick={() => submitHandle(i)}
           >
             <img
@@ -29,7 +29,7 @@ const DropDown = ({ categoriesData, setDropDown }) => {
               }}
               alt=""
             />
-            <h3 className="m-3 cursor-pointer select-none">{i.title}</h3>
+            <h3 className="m-3 font-semibold cursor-pointer select-none">{i.title}</h3>
           </div>
         ))}
     </div>

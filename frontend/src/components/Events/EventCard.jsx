@@ -23,31 +23,36 @@ const EventCard = ({ active, data }) => {
         toast.success("Item added to cart successfully!");
       }
     }
-  }
+  };
   return (
     <div
-      className={`w-full block bg-white rounded-lg ${
+      className={`w-full block bg-white shadow rounded ${
         active ? "unset" : "mb-12"
-      } lg:flex p-2`}
+      } lg:flex `}
     >
-      <div className="w-full lg:-w[50%] m-auto">
+      <div className="w-full  relative lg:-w[50%] m-auto">
         <img src={`${data.images[0]?.url}`} alt="" />
-      </div>
-      <div className="w-full lg:[w-50%] flex flex-col justify-center">
-        <h2 className={`${styles.productTitle}`}>{data.name}</h2>
-        <p>{data.description}</p>
-        <div className="flex py-2 justify-between">
-          <div className="flex">
-            <h5 className="font-[500] text-[18px] text-[#d55b45] pr-3 line-through">
-              {data.originalPrice}$
-            </h5>
-            <h5 className="font-bold text-[20px] text-[#333] font-Roboto">
-              {data.discountPrice}$
-            </h5>
-          </div>
+        <div className="badge absolute top-4 right-2 p-4">
           <span className="pr-3 font-[400] text-[17px] text-[#44a55e]">
+            {data.stock} in stock
+          </span>
+          <span className="pr-3 font-[400] text-[17px] text-red-600">
             {data.sold_out} sold
           </span>
+        </div>
+      </div>
+      <div className="w-full p-4 lg:[w-50%] flex flex-col justify-center">
+        <h2 className={`${styles.productTitle}`}>{data.name}</h2>
+        <p>{data.description.slice(0,400)+"..."}</p>
+        <div className="flex py-2 justify-between">
+          <div className="flex">
+            <h5 className="font-bold text-[20px] text-[#333] font-Roboto">
+              ₦ {data.discountPrice}
+            </h5>
+            <h5 className="font-[500] text-[18px] text-[#d55b45] pl-3 line-through">
+              ₦{data.originalPrice}
+            </h5>
+          </div>
         </div>
         <CountDown data={data} />
         <br />
@@ -55,8 +60,15 @@ const EventCard = ({ active, data }) => {
           <Link to={`/product/${data._id}?isEvent=true`}>
             <div className={`${styles.button} text-[#fff]`}>See Details</div>
           </Link>
-          <div className={`${styles.button} text-[#fff] ml-5`} onClick={() => addToCartHandler(data)}>Add to cart</div>
+          <div
+            className={`${styles.button} text-[#fff] ml-5`}
+            onClick={() => addToCartHandler(data)}
+          >
+            Add to cart
+          </div>
         </div>
+
+        
       </div>
     </div>
   );

@@ -25,8 +25,11 @@ const ProductDetailsPage = () => {
   }, [allProducts, allEvents]);
 
   return (
-    <div>
+    <div className="profilebg">
       <Header />
+      <div className="md:pt-0 pt-10">
+        </div>
+
       <ProductDetails data={data} />
         {
           !eventData && (
