@@ -77,7 +77,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
       {data ? (
         <div className="fixed w-full h-screen top-0 left-0 bg-[#00000030] backdrop-blur-lg z-50 flex items-center justify-center">
             
-          <div className="w-[90%] 800px:w-[60%] h-[95vh]  800px:h-[75vh] bg-[#ffffffdc] backdrop-blur-2xl overflow-y-scroll rounded shadow relative p-4">
+          <div className="w-[90%] 800px:w-[60%] h-[95vh]  800px:h-[75vh] bg-[#fff] overflow-y-scroll rounded shadow relative p-4">
 
           <RxCross1
               size={30}
@@ -101,18 +101,18 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                 </Link>
               </div>
               <div
-                className={`${styles.button} bg-[#000] mt-4 rounded h-11`}
+                className={`${styles.button} bg-[#333] mt-4 rounded-btn h-11`}
                 onClick={handleMessageSubmit}
               >
                 <span className="text-[#fff] flex items-center">
-                  Send Message <AiOutlineMessage className="ml-2" />
+                  Send Message
                 </span>
               </div>
             </div>
 
             <div className="block w-full 800px:flex pt-2 gap-8 justify-between items-start">
               <div className="w-full 800px:w-[50%] relative mb-4 md:mb-0">
-                <img className="rounded h-80 w-full shadow" src={`${data.images && data.images[select]?.url}`} alt="" />
+                <img className="rounded-btn h-80 w-full shadow" src={`${data.images && data.images[select]?.url}`} alt="" />
 
                 <h5 className="text-[14px] text-[green] mt-5 badge backdrop-blur-3xl shadow absolute top-0 right-2 py-4 px-4">
                   {data?.stock} in stock
@@ -124,7 +124,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                       <div
                         className={`${
                           select === 0 ? null : null
-                        } carousel-item cursor-pointer mr-2 mt-2 border-4 shadow border-white rounded w-32 overflow-hidden`}
+                        } carousel-item cursor-pointer mr-2 mt-2 border-4 shadow border-white rounded-btn w-32 overflow-hidden`}
                       >
                         <img
                           src={`${i?.url}`}
@@ -139,7 +139,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
               </div>
 
               <div className="w-full 800px:w-[50%] ">
-                <h1 className={`${styles.productTitle} text-[20px] pb-4`}>
+                <h1 className={`font-[700]  text-[#010101] text-[25px] pb-4`}>
                   {data.name}
                 </h1>
                 <p>{data.description.slice(0,400)+ "..."}</p>
@@ -148,7 +148,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                   {/* <h4 className={`${styles.productDiscountPrice} p-0 m-0`}>
                   ₦ {formatPrice(data.discountPrice)}
                   </h4> */}
-                  <h3 className={`${styles.productDiscountPrice} p-0 m-0`}>
+                  <h3 className={`font-bold text-xl font-Roboto text-[#010101] p-0 m-0`}>
                   ₦{data.originalPrice ? formatPrice(data.originalPrice) : null}
                   </h3>
                 </div>
@@ -194,7 +194,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                   onClick={() => addToCartHandler(data._id)}
                 >
                   <span className="text-[#fff] flex items-center">
-                    Add to cart <AiOutlineShoppingCart className="ml-1" />
+                    Add to cart 
                   </span>
                 </div>
               </div>

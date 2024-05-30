@@ -16,7 +16,7 @@ const Events = () => {
         <div className="bg-[#FF1E00] w-12 h-[2px] mt-2 text-center"></div>
       </div>
 
-      <div className="w-full grid p-2">
+      <div className="w-full grid  p-2">
          {
           allEvents.length !== 0 && (
             <EventCard data={allEvents && allEvents[0]} />

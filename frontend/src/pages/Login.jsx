@@ -15,9 +15,9 @@ const LoginPage = () => {
 
   return (
     <div className="flex flex-col md:flex-row">
-      <div className=" z-10 md:w-[50%] md:h-screen h-[30vh] bg-white flex items-center justify-center">
+      <div className=" z-10 md:w-[50%] md:h-screen hidden h-[10vh] bg-white lg:flex items-center justify-center">
         <img
-          src="https://trueafricanart.com/cdn/shop/files/cow_e3860c30-3b1a-40b7-959e-6cd5bfe580c3_2048x2048.jpg?v=1689208053"
+          src="https://images.saatchiart.com/saatchi/1250863/art/9043103/8106281-WFOWPSAY-7.jpg"
           className="w-full h-full object-cover"
           alt=""
         />

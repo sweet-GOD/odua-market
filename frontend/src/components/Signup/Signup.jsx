@@ -51,14 +51,14 @@ const Singup = () => {
   return (
     <>
       {/* <Header /> */}
-      <div className="md:h-screen h-[80vh] md:w-[50%] profilebg flex flex-col justify-start md:justify-center py-12 sm:px-6 lg:px-8">
+      <div className="h-screen md:w-[50%] profilebg flex flex-col justify-start md:justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <h2 className="mt-6 text-center text-3xl font-bold text-[#010101]">
+          <h2 className="mt-6 text-center text-3xl font-bold text-[#fff]">
             Sign up a new user
           </h2>
         </div>
         <div className="mt-8 sm:mx-auto p-4 sm:w-full sm:max-w-md">
-          <div className="bg-white rounded overflow-hidden py-8 px-4 shadow-md sm:px-10">
+          <div className="bg-white rounded-btn overflow-hidden py-8 px-4 shadow-md sm:px-10">
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label
@@ -170,7 +170,7 @@ const Singup = () => {
               <div>
                 <button
                   type="submit"
-                  className="group relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#010101] opacity-80 hover:opacity-70"
+                  className="group relative w-full btn flex justify-center  px-4 border border-transparent  font-medium rounded-btn text-white bg-[#010101] opacity-80 hover:opacity-90"
                 >
                   {loading ? <span class="loading loading-dots loading-md"></span> : 
                 "Sign Up"

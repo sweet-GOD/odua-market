@@ -6,7 +6,7 @@ import animationData from "../Assests/animations/107043-success.json";
 
 const OrderSuccessPage = () => {
   return (
-    <div>
+    <div className="profilebg">
       <Header />
       <Success />
       <Footer />
@@ -24,9 +24,9 @@ const Success = () => {
     },
   };
   return (
-    <div className="h-screen bg-white w-full flex items-center justify-center flex-col">
+    <div className="h-screen  w-full flex items-center justify-center flex-col">
       <Lottie options={defaultOptions} width={300} height={300} />
-      <h5 className="text-center mx-10 mb-52 text-[25px] text-[#010101]">
+      <h5 className="text-center mx-10 mb-52 text-[25px] multicolor-text">
         Your order has been placed successfully!
       </h5>
       <br />

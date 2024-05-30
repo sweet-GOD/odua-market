@@ -83,6 +83,30 @@ input[type=number] {
 }
 
 .profilebg{
-  background: url("../src/Assests/bg.avif");
-  object-fit: auto;
+  background: url("../src/Assests/bg.jpg");
+  background-size: cover !important;
+  background-repeat: no-repeat;
+
+}
+
+.multicolor-text {
+  background: linear-gradient(
+    90deg,
+    #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, rgba(229, 211, 243, 0.938),
+    #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #ffffff88, #8b00ff
+  );
+  background-size: 1000%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbow-animation 5s linear infinite;
+}
+
+@keyframes rainbow-animation {
+  0% {
+    background-position: 0%;
+  }
+  100% {
+    background-position: 100%;
+  }
+  
 }

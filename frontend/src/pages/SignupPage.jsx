@@ -25,7 +25,7 @@ const SignupPage = () => {
   }, []);
   return (
     <div className="flex flex-col md:flex-row">
-      <div className="z-10 md:w-[50%] md:h-screen h-[30vh] bg-white flex items-center justify-center">
+      <div className="z-10 md:w-[50%] hidden  md:h-screen h-[10vh] bg-white lg:flex items-center justify-center">
         {/* <Lottie options={defaultOptions} height={600} width={600} /> */}
         <img
           src="https://doziearts.com/cdn/shop/products/image_31861890-bb38-4565-9465-2aa9b88cb8ba_900x.jpg?v=1629063723"

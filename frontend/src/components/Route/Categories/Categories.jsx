@@ -12,7 +12,7 @@ const Categories = () => {
   return (
     <div className=" pb-1 px-4">
       <div className="pb-12 pt-12 md:pt-2 flex flex-col justify-center  items-center">
-        <h1 className="text-center text-[#010101] text-2xl font-semibold">
+        <h1 className="text-center text-[#fff] text-2xl font-semibold">
           Popular Categories
         </h1>
         <div className="bg-[#FF1E00] w-12 h-[2px] mt-2 text-center"></div>

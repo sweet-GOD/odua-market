@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import styles from "../../styles/styles";
-import { categoriesData, productData } from "../../static/data";
+import styles from "../../../styles/styles";
+import { sellerCategoriesData, productData } from "../../../static/data";
 import {
   AiOutlineHeart,
   AiOutlineSearch,
@@ -10,16 +10,16 @@ import {
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { BiMenuAltLeft } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
-import DropDown from "./DropDown";
-import Navbar from "./Navbar";
+import DropDown from "../../../components/Layout/DropDown";
+import Navbar from "../../../components/Layout/Navbar";
 import { useSelector } from "react-redux";
-import Cart from "../cart/Cart";
-import Wishlist from "../Wishlist/Wishlist";
 import { RxCross1 } from "react-icons/rx";
-import corsalogo from "../../Assests/ocorsalogo.svg";
+import corsalogo from "../../../Assests/ocorsalogo.svg";
 import { IoMenu } from "react-icons/io5";
+import SellerNavbar from "../../Layout/SellerNavbar";
+import SellerDropDown from "../../Layout/SellerDropDown";
 
-const Header = ({ activeHeading }) => {
+const SellerHeader = ({ activeHeading }) => {
   const { isAuthenticated, user } = useSelector((state) => state.user);
   const { isSeller } = useSelector((state) => state.seller);
   const { wishlist } = useSelector((state) => state.wishlist);
@@ -33,6 +33,7 @@ const Header = ({ activeHeading }) => {
   const [openWishlist, setOpenWishlist] = useState(false);
   const [open, setOpen] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
+  const { seller } = useSelector((state) => state.seller);
 
 
   const handleSearchChange = (e) => {
@@ -60,18 +61,18 @@ const Header = ({ activeHeading }) => {
       <div className={`${styles.section}  p-1 z-10`}>
         <div className="hidden 800px:py-[0px] 800px:flex items-center justify-between">
           <div>
-            <Link to="/">
+            <Link to="/dashboard">
               <img className="w-36 " src={corsalogo} alt="" />
             </Link>
           </div>
           <h1 className="text font-bold  multicolor-text">PLACE ADVERTS HERE!!!</h1>
 
           <div
-            className={`${styles.button} bg-white hover:opacity-80 transition ease-in-out duration-300 shadow-lg !h-11`}
+            className={`${styles.button}  hover:opacity-80 transition ease-in-out duration-300 shadow-lg !h-11`}
           >
-            <Link to={`${isSeller ? "/dashboard" : "/shop-create"}`}>
-              <h1 className="text-[#010101] flex uppercase text-sm items-center font-semibold">
-                {isSeller ? "My Dashboard" : "Go to seller mode"}{" "}
+            <Link to={`${isSeller ? "/" : "/"}`}>
+              <h1 className="text-[#fff] flex uppercase text-sm items-center font-semibold">
+                {isSeller ? "Wallet Address" : ""}{" "}
                 {/* <IoIosArrowForward className="ml-1" /> */}
               </h1>
             </Link>
@@ -100,14 +101,10 @@ const Header = ({ activeHeading }) => {
                 >
                   MENU
                 </button>
-                {/* <IoIosArrowDown
-                size={20}
-                className="absolute right-2 top-4 cursor-pointer text-[#010101]"
-                onClick={() => setDropDown(!dropDown)}
-              /> */}
+                
                 {dropDown ? (
-                  <DropDown
-                    categoriesData={categoriesData}
+                  <SellerDropDown
+                    categoriesData={sellerCategoriesData}
                     setDropDown={setDropDown}
                   />
                 ) : null}
@@ -155,76 +152,29 @@ const Header = ({ activeHeading }) => {
 
           {/* navitems */}
           <div className={`${styles.noramlFlex}`}>
-            <Navbar active={activeHeading} />
+            <SellerNavbar active={activeHeading} />
           </div>
 
           <div className="flex">
-          <div className={`${styles.noramlFlex}`}>
-              <div
-                data-tip={user ? user.email : "Profile"}
-                className="relative tooltip tooltip-bottom cursor-pointer hover:text-white mr-[15px]"
-              >
-                {isAuthenticated ? (
-                  <Link to="/profile">
-                    <img
-                      src={`${user?.avatar?.url}`}
-                      className="w-[35px] h-[35px] rounded-full"
-                      alt=""
-                    />
-                  </Link>
-                ) : (
-                  <>
-                    <CgProfile onClick={() => setOpenProfile(!openProfile)} size={26} color="rgb(255 255 255 / 99%)" />
-                  {openProfile && 
-                    <div className="z-10 absolute bg-white w-64 right-0 mt-6 shadow-2xl flex flex-col gap-1 p-1 rounded-xl rounded-tr-none">
-                    <Link className="btn bg-transparent border-0 font-bold " to={"/sign-up"}>Sign Up</Link>
-
-                      <Link className="btn bg-[#010101] hover:bg-black text-white border-0 shadow-2xl " to={"/login"}>Log In</Link>
-                    </div> }
-                    </>
-                )}
-              </div>
+          <div className={`${styles.noramlFlex} gap-3`}>
+            <h1 className="text-gray-300 text-sm font-semibold">{seller.name}</h1>
+          <Link to={`/shop/${seller._id}`}  data-tip={seller ? seller.email : "Profile"} className="tooltip tooltip-bottom">
+            <img
+              src={`${seller.avatar?.url}`}
+              alt=""
+              className="w-[36px] h-[36px] rounded-full object-cover"
+            />
+          </Link>
             </div>
 
             <div className={`${styles.noramlFlex}`}>
-              <div
-                data-tip="Wishlist"
-                className="relative tooltip tooltip-bottom  cursor-pointer mr-[15px]"
-                onClick={() => setOpenWishlist(true)}
-              >
-                <AiOutlineHeart size={26} color="rgb(255 255 255 / 99%)" />
-                <span className="absolute right-0 top-0 rounded-full bg-[#fff] w-4 h-4 top right p-0 m-0 text-[#010101] font-mono text-[12px] leading-tight text-center">
-                  {wishlist && wishlist.length}
-                </span>
-              </div>
+              
             </div>
 
             <div className={`${styles.noramlFlex}`}>
-              <div
-                data-tip="Cart"
-                className="relative tooltip tooltip-bottom cursor-pointer mr-[15px]"
-                onClick={() => setOpenCart(true)}
-              >
-                <AiOutlineShoppingCart
-                  size={26}
-                  color="rgb(255 255 255 / 99%)"
-                />
-
-                <span className="absolute right-0 top-0 rounded-full bg-[#fff] w-4 h-4 top right p-0 m-0 text-[#010101] font-mono text-[12px] leading-tight text-center">
-                  {cart && cart.length}
-                </span>
-              </div>
+              
             </div>
-
-            
-
-            {/* cart popup */}
-            {openCart ? <Cart setOpenCart={setOpenCart} /> : null}
-
-            {/* wishlist popup */}
-            {openWishlist ? (
-              <Wishlist setOpenWishlist={setOpenWishlist} />
-            ) : null}
+           
           </div>
           </div>
         </div>
@@ -246,7 +196,7 @@ const Header = ({ activeHeading }) => {
             />
           </div>
           <div>
-            <Link to="/">
+            <Link to="/dashboard">
               <img
                 src={corsalogo}
                 alt=""
@@ -265,11 +215,7 @@ const Header = ({ activeHeading }) => {
               </span>
             </div>
           </div>
-          {/* cart popup */}
-          {openCart ? <Cart setOpenCart={setOpenCart} /> : null}
-
-          {/* wishlist popup */}
-          {openWishlist ? <Wishlist setOpenWishlist={setOpenWishlist} /> : null}
+          
         </div>
 
         {/* header sidebar */}
@@ -362,7 +308,7 @@ const Header = ({ activeHeading }) => {
                 ) : null}
               </div>
 
-              <Navbar active={activeHeading} />
+              <SellerNavbar active={activeHeading} />
               {/* <div className={`${styles.button} ml-4 `}>
                 <Link to="/shop-create">
                   <h1 className="text-[#fff] flex items-center">
@@ -392,4 +338,4 @@ const Header = ({ activeHeading }) => {
   );
 };
 
-export default Header;
+export default SellerHeader;

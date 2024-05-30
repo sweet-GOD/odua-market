@@ -410,7 +410,7 @@ const PaymentInfo = ({
       <br />
       {/* cash on delivery */}
       <div>
-        {/* <div className="flex w-full pb-5 border-b mb-2">
+        <div className="flex w-full pb-5 border-b mb-2">
           <div
             className="w-[25px] h-[25px] rounded-full bg-transparent border-[3px] border-[#1d1a1ab4] relative flex items-center justify-center"
             onClick={() => setSelect(3)}
@@ -422,7 +422,7 @@ const PaymentInfo = ({
           <h4 className="text-[18px] pl-2 font-[600] text-[#000000b1]">
             Cash on Delivery
           </h4>
-        </div> */}
+        </div>
 
         {/* cash on delivery */}
         {select === 3 ? (

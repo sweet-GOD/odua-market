@@ -19,9 +19,9 @@ const SuggestedProduct = ({ data }) => {
       {data ? (
         <div className={`p-1 ${styles.section}`}>
           <h2
-            className={`${styles.heading} text-[25px] font-[500] border-b my-5`}
+            className={`${styles.heading} text-[25px] font-[500] border-b mt-10 pb-6`}
           >
-            Related Product
+            Suggested Products
           </h2>
           <div className={`${styles.normalGrid}`}>
              {

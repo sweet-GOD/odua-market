@@ -2,12 +2,12 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../../styles/styles";
 
-const DropDown = ({ categoriesData, setDropDown }) => {
+const SellerDropDown = ({ categoriesData, setDropDown }) => {
   const navigate = useNavigate();
   const submitHandle = (i) => {
-    navigate(`/products?category=${i.title}`);
+    navigate(`/${i.url}`);
     setDropDown(false);
-    window.location.reload();
+    // window.location.reload();
   };
   return (
     <div className="pb-4 w-[320px] p-2 backdrop-blur-xl bg-[#ffffffea] mt-8 absolute z-30 rounded-xl shadow-2xl">
@@ -18,7 +18,7 @@ const DropDown = ({ categoriesData, setDropDown }) => {
             className={`${styles.noramlFlex} hover:bg-white rounded-xl`}
             onClick={() => submitHandle(i)}
           >
-            <img
+            {/* <img
               src={i.image_Url}
               style={{
                 width: "25px",
@@ -28,7 +28,7 @@ const DropDown = ({ categoriesData, setDropDown }) => {
                 userSelect: "none",
               }}
               alt=""
-            />
+            /> */}
             <h3 className="m-3 font-semibold cursor-pointer select-none">{i.title}</h3>
           </div>
         ))}
@@ -36,4 +36,4 @@ const DropDown = ({ categoriesData, setDropDown }) => {
   );
 };
 
-export default DropDown;
+export default SellerDropDown;

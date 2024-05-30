@@ -15,14 +15,17 @@ const ShuffleHero = () => {
         {/* <span className="block mb-4 text-xs md:text-sm text-[#010101] font-medium">
         Your Trusted Marketplace 
         </span> */}
-        <h3 className="text-6xl md:text-7xl  text-[#010101] font-bold">
+        <h3 className="text-6xl md:text-7xl   font-black multicolor-text">
         Discover the Essence of Africa
         </h3>
-        <p className="text-lg md:text-lg text-gray-600 my-8 md:my-8">
+        <p className="text-xl md:text-lg text-white my-8 md:my-8 font-semibold">
         Embrace the beauty, culture, and craftmanship of African-made products, handcrafted with love and tradition.
         </p>
-        <button className="bg-[#035529] w-full text-white  font-medium mt-8 py-4 px-14 rounded transition-all hover:opacity-90  active:scale-95">
+        <button className="bg-[#fff]   w-full text-[#010101]  font-bold text-lg mt-8 py-4 px-14 rounded-btn transition-all hover:opacity-90  active:scale-95">
+          <span className="multicolor-text">
+
           Shop Now <BsArrowRight size={20} className=" ml-1 inline" />
+          </span>
         </button>
       </div>
       {/* <img src={require("../../../Assests/heroimg.png")} alt="" /> */}
@@ -122,7 +125,7 @@ const generateSquares = () => {
       key={sq.id}
       layout
       transition={{ duration: 1.5, type: "spring" }}
-      className="w-full h-full rounded "
+      className="w-full h-full rounded-btn "
       style={{
         backgroundImage: `url(${sq.src})`,
         backgroundSize: "cover",

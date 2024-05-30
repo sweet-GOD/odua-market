@@ -115,7 +115,7 @@ const ProductDetails = ({ data }) => {
   return (
     <div className=" ">
       {data ? (
-        <div className={`${styles.section} w-[90%] 800px:w-[80%]`}>
+        <div className={`${styles.section} w-[90%] text-[#eee] 800px:w-[80%]`}>
           <div className="text-sm overflow-hidden breadcrumbs pt-10">
             <ul>
               <li>
@@ -135,7 +135,7 @@ const ProductDetails = ({ data }) => {
                 <img
                   src={`${data && data.images[select]?.url}`}
                   alt=""
-                  className="w-full h-[400px] border-4 shadow border-white rounded object-cover"
+                  className="w-full h-[400px]  rounded-btn object-cover"
                 />
 
 
@@ -145,7 +145,7 @@ const ProductDetails = ({ data }) => {
                       <div
                         className={`${
                           select === 0 ? null : null
-                        } carousel-item cursor-pointer mr-2 mt-2 border-4 shadow border-white rounded w-32 overflow-hidden`}
+                        } carousel-item cursor-pointer mr-2 mt-2  shadow  rounded-btn w-32 overflow-hidden`}
                       >
                         <img
                           src={`${i?.url}`}
@@ -158,7 +158,7 @@ const ProductDetails = ({ data }) => {
                 </div>
               </div>
 
-              <div className="w-full 800px:w-[50%] p-4 rounded shadow md:p-4 bg-white">
+              <div className="w-full 800px:w-[50%] p-4 rounded shadow md:p-0 ">
                 {/* ******************** */}
 
                 <div className="flex items-center justify-between w-full">
@@ -172,7 +172,7 @@ const ProductDetails = ({ data }) => {
                     </Link>
                     <div className="pr-8">
                       <Link to={`/shop/preview/${data?.shop._id}`}>
-                        <h3 className={`${styles.shop_name} p-0 m-0`}>
+                        <h3 className={`text-[14px] font-semibold text-green-300 p-0 m-0`}>
                           {data.shop.name}
                         </h3>
                       </Link>
@@ -187,13 +187,13 @@ const ProductDetails = ({ data }) => {
                     onClick={handleMessageSubmit}
                   >
                     <span className="text-white flex items-center">
-                      Send Message <AiOutlineMessage className="ml-1" />
+                      Send Message
                     </span>
                   </div>
                 </div>
 
                 {/* ******************** */}
-                <h1 className={`${styles.productTitle} text-4xl mt-4`}>
+                <h1 className={`${styles.productTitle} text-4xl font-bold mt-4`}>
                   {data.name}
                 </h1>
                 <p className="my-4">{data.description.slice(0,300)+ "..."}</p>
@@ -233,7 +233,7 @@ const ProductDetails = ({ data }) => {
                         size={30}
                         className="cursor-pointer"
                         onClick={() => removeFromWishlistHandler(data)}
-                        color={click ? "red" : "#333"}
+                        color={click ? "red" : "#fff"}
                         title="Remove from wishlist"
                       />
                     ) : (
@@ -241,18 +241,18 @@ const ProductDetails = ({ data }) => {
                         size={30}
                         className="cursor-pointer"
                         onClick={() => addToWishlistHandler(data)}
-                        color={click ? "red" : "#333"}
+                        color={click ? "red" : "#fff"}
                         title="Add to wishlist"
                       />
                     )}
                   </div>
                 </div>
                 <div
-                  className={`${styles.button} !mt-6 rounded hover:opacity-75 transition ease-in-out duration-300 flex items-center w-full`}
+                  className={`${styles.button} bg-white !mt-6 rounded-btn hover:opacity-75 transition ease-in-out duration-300 flex items-center w-full`}
                   onClick={() => addToCartHandler(data._id)}
                 >
-                  <span className="text-white flex items-center">
-                    Add to cart <AiOutlineShoppingCart className="ml-1" />
+                  <span className="text-[#010101] font-semibold flex items-center">
+                    Add to cart 
                   </span>
                 </div>
               </div>
@@ -268,8 +268,8 @@ const ProductDetails = ({ data }) => {
               totalReviewsLength={totalReviewsLength}
               averageRating={averageRating}
             />
-            <div className=" md:col-span-1 col-span-3 py-10 mb-8 bg-white rounded shadow">
-              <div className="relative px-8">
+            <div className=" md:col-span-1 col-span-3 py-10 mb-8 text-[#010101] bg-gray-600 rounded-box h-full shadow">
+              <div className="relative px-8 ">
                 <h5
                   className={`
                py-3 text-[18px] px-1 leading-5 font-[600] cursor-pointer 800px:text-[20px]`}
@@ -299,8 +299,8 @@ const ProductDetails = ({ data }) => {
                   </Link>
                   <p className="pt-2">{data.shop.description}</p>
                 </div>
-                <div className="w-full 800px:w-[50%] mt-5 800px:mt-0 800px:flex flex-col items-end">
-                  <div className="text-left">
+                <div className="w-full  mt-5 800px:mt-0 800px:flex flex-col items-end">
+                  <div className="text-left w-full">
                     <h5 className="font-[600]">
                       Joined on:{" "}
                       <span className="font-[500]">
@@ -319,7 +319,7 @@ const ProductDetails = ({ data }) => {
                     </h5>
                     <Link to={`/shop/preview/${data.shop._id}`}>
                       <div
-                        className={`${styles.button} !rounded-[4px] w-full !h-[39.5px] mt-3`}
+                        className={`${styles.button} rounded-btn w-full  mt-3 `}
                       >
                         <h4 className="text-white">Visit Shop</h4>
                       </div>
@@ -345,11 +345,11 @@ const ProductDetailsInfo = ({
   const [active, setActive] = useState(1);
 
   return (
-    <div className="bg-[#fff] md:col-span-2 col-span-3  px-3 800px:px-10 w-full py-2 rounded shadow">
+    <div className="bg-gray-600 md:col-span-2 col-span-3  px-3 800px:px-10 w-full py-2 rounded-box shadow">
       <div className="w-full flex justify-start gap-10 border-b pt-10 pb-2">
         <div className="relative">
           <h5
-            className={`${active === 1 ? "text-[#010101]" : "text-[#777]"}
+            className={`${active === 1 ? "text-[#010101]" : "text-[#999]"}
                py-3 text-[18px] px-1 leading-5 font-[600] cursor-pointer 800px:text-[20px]`}
             onClick={() => setActive(1)}
           >
@@ -361,7 +361,7 @@ const ProductDetailsInfo = ({
         </div>
         <div className="relative">
           <h5
-            className={`${active === 2 ? "text-[#010101]" : "text-[#777]"}
+            className={`${active === 2 ? "text-[#010101]" : "text-[#999]"}
                py-3 text-[18px] px-1 leading-5 font-[600] cursor-pointer 800px:text-[20px]`}
             onClick={() => setActive(2)}
           >
@@ -374,25 +374,25 @@ const ProductDetailsInfo = ({
       </div>
       {active === 1 ? (
         <>
-          <p className="py-8 text-[18px] leading-8 pb-10 whitespace-pre-line">
+          <p className="py-8 text-[18px] leading-8 pb-10 whitespace-pre-line text-[#010101]">
             {data.description}
           </p>
         </>
       ) : null}
 
       {active === 2 ? (
-        <div className="w-full min-h-[40vh] flex flex-col items-center py-3 overflow-y-scroll">
+        <div className="w-full min-h-[40vh] flex flex-col items-center py-3 text-[#010101] overflow-y-scroll">
           {data &&
             data.reviews.map((item, index) => (
-              <div className="w-full flex my-2">
+              <div className="w-full items-center flex my-2">
                 <img
-                  src={`${item.user.avatar?.url}`}
+                  src={`${item.user.avatar.url}`}
                   alt=""
                   className="w-[50px] h-[50px] rounded-full"
                 />
                 <div className="pl-2 ">
                   <div className="w-full flex items-center">
-                    <h1 className="font-[500] mr-3">{item.user.name}</h1>
+                    <h1 className="font-[500] mr-3 mb-3">{item.user.name}</h1>
                     <Ratings rating={data?.ratings} />
                   </div>
                   <p>{item.comment}</p>

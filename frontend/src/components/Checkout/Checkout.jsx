@@ -146,10 +146,10 @@ const Checkout = () => {
         </div>
       </div>
       <div
-        className={`${styles.button} w-[80%] rounded-lg 800px:w-[280px] mt-10`}
+        className={`${styles.button} w-[80%] rounded-btn bg-white 800px:w-[280px] font-semibold mt-10`}
         onClick={paymentSubmit}
       >
-        <h5 className="text-white">Go to Payment</h5>
+        <h5 className="text-[#010101]">Go to Payment</h5>
       </div>
     </div>
   );
@@ -173,7 +173,7 @@ const ShippingInfo = ({
   setZipCode,
 }) => {
   return (
-    <div className="w-full 800px:w-[95%] bg-white rounded shadow-xl p-5 pb-8">
+    <div className="w-full 800px:w-[95%] bg-white rounded-box shadow-xl p-5 pb-8">
       <h5 className="text-[18px] font-[500]">Shipping Address</h5>
       <br />
       <form>
@@ -328,7 +328,7 @@ const CartData = ({
   discountPercentenge,
 }) => {
   return (
-    <div className="w-full bg-[#fff] shadow-xl p-5 pb-8">
+    <div className="w-full rounded-box bg-[#fff] shadow-xl p-5 pb-8">
       <div className="flex justify-between">
         <h3 className="text-[16px] font-[400] text-[#010101]">subtotal:</h3>
         <h5 className="text-[18px] font-[600]">

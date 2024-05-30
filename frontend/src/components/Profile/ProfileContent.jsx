@@ -23,6 +23,7 @@ import { useEffect } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { getAllOrdersOfUser } from "../../redux/actions/order";
+import { formatPrice } from "../../static/data";
 
 const ProfileContent = ({ active }) => {
   const { user, error, successMessage } = useSelector((state) => state.user);
@@ -77,7 +78,7 @@ const ProfileContent = ({ active }) => {
   };
 
   return (
-    <div className="w-full md:gap-4 flex flex-col md:flex-row bg-white md:p-16 p-4 rounded shadow-lg">
+    <div className="w-full lg:gap-4 flex flex-col lg:flex-row bg-white lg:p-16 p-4 rounded-box shadow-lg">
       {/* profile */}
       {active === 1 && (
         <>
@@ -85,7 +86,7 @@ const ProfileContent = ({ active }) => {
             <div className="relative ">
               <img
                 src={`${user?.avatar?.url}`}
-                className="w-full h-full rounded object-cover shadow"
+                className="w-full h-full rounded-btn object-cover shadow"
                 alt=""
               />
               <div className="w-[48px] h-[48px] bg-[#fff] rounded-full flex items-center justify-center cursor-pointer absolute shadow-xl top-[10px] left-[10px]">
@@ -155,7 +156,7 @@ const ProfileContent = ({ active }) => {
               </div>
               <div className="w-full  flex items-center justify-center">
                 <input
-                  className={`btn w-full mx-auto h-[40px] bg-[#010101] hover:bg-[#010101] hover:opacity-90 border-0 text-center text-white rounded mt-4 800px:mt-4 cursor-pointer`}
+                  className={`btn w-full mx-auto h-[40px] bg-[#010101] hover:bg-[#010101] hover:opacity-90 border-0 text-center text-white rounded-btn mt-4 800px:mt-4 cursor-pointer`}
                   required
                   value="Update Profile"
                   type="submit"
@@ -276,15 +277,35 @@ const AllOrders = () => {
       });
     });
 
+  console.log("************************");
+  console.log(orders);
+  console.log("************************");
+
   return (
     <div className="pt-1">
       {orders &&
         orders.map((item) => (
-          <div>
-            <div>
-              <h1>{item.totalPrice}</h1>
-              {/* <img src={item.images[0].url} alt="" /> */}
-            </div>
+          <div className="grid rounded grid-cols-10 p-2 shadow">
+            {item.cart.map((i) => (
+              <>
+              <div className="col-span-10 mb-2 md:mb-0 md:col-span-1 rounded-box overflow-hidden">
+                <img src={i.images[0].url} alt="" />
+              </div>
+              <div className="col-span-10 md:col-span-5  flex flex-col items-start justify-center md:pl-4 pl-2 mb-2 md:mb-0">
+                <h1 className="font-bold">{i.name}</h1>
+                <h1>Status: {item.status}</h1>
+              </div>
+              <div className="col-span-3 md:col-span-1  flex flex-col items-start justify-center px-2">
+                <h1>{i.shop.name}</h1>
+              </div>
+              <div className=" col-span-3 md:col-span-1  flex flex-col items-start justify-center px-2">
+                <h1>{i.qty}</h1>
+              </div>
+              <div className="col-span-4 md:col-span-2  flex flex-col items-start justify-center px-2">
+                <h1 className="text-lg font-bold">₦ {formatPrice(i.qty * i.originalPrice)}</h1>
+              </div>
+            </>
+            ))}
           </div>
         ))}
       {/* <DataGrid
@@ -305,87 +326,40 @@ const AllRefundOrders = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllOrdersOfUser(user._id));
-  }, []);
+    if (user && user._id) {
+      dispatch(getAllOrdersOfUser(user._id));
+    }
+  }, [dispatch, user]);
 
   const eligibleOrders =
     orders && orders.filter((item) => item.status === "Processing refund");
 
-  const columns = [
-    { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
-
-    {
-      field: "status",
-      headerName: "Status",
-      minWidth: 130,
-      flex: 0.7,
-      cellClassName: (params) => {
-        return params.getValue(params.id, "status") === "Delivered"
-          ? "greenColor"
-          : "redColor";
-      },
-    },
-    {
-      field: "itemsQty",
-      headerName: "Items Qty",
-      type: "number",
-      minWidth: 130,
-      flex: 0.7,
-    },
-
-    {
-      field: "total",
-      headerName: "Total",
-      type: "number",
-      minWidth: 130,
-      flex: 0.8,
-    },
-
-    {
-      field: " ",
-      flex: 1,
-      minWidth: 150,
-      headerName: "",
-      type: "number",
-      sortable: false,
-      renderCell: (params) => {
-        return (
-          <>
-            <Link to={`/user/order/${params.id}`}>
-              <Button>
-                <AiOutlineArrowRight size={20} />
-              </Button>
-            </Link>
-          </>
-        );
-      },
-    },
-  ];
-
-  const row = [];
-
-  eligibleOrders &&
-    eligibleOrders.forEach((item) => {
-      row.push({
-        id: item._id,
-        itemsQty: item.cart.length,
-        total: "US$ " + item.totalPrice,
-        status: item.status,
-      });
-    });
-
   return (
-    <div className="pl-8 pt-1">
-      <DataGrid
-        rows={row}
-        columns={columns}
-        pageSize={10}
-        autoHeight
-        disableSelectionOnClick
-      />
+    <div className="p-4 sm:p-6 lg:p-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {eligibleOrders && eligibleOrders.length > 0 ? (
+          eligibleOrders.map((order) => (
+            <div key={order._id} className="bg-white shadow-md rounded-lg p-4">
+              <h2 className="text-lg font-semibold mb-2">Order ID: {order._id}</h2>
+              <p className="text-gray-700">Status: <span className={order.status === "Delivered" ? "text-green-600" : "text-red-600"}>{order.status}</span></p>
+              <p className="text-gray-700">Items Qty: {order.cart.length}</p>
+              <p className="text-gray-700">Total: US$ {order.totalPrice}</p>
+              <Link to={`/user/order/${order._id}`}>
+                <Button variant="contained" color="primary" className="flex items-center mt-4">
+                  <AiOutlineArrowRight size={20} />
+                  <span className="ml-2">View Order</span>
+                </Button>
+              </Link>
+            </div>
+          ))
+        ) : (
+          <p className="text-center text-gray-700 col-span-full">No orders found.</p>
+        )}
+      </div>
     </div>
   );
 };
+
 
 const TrackOrder = () => {
   const { user } = useSelector((state) => state.user);

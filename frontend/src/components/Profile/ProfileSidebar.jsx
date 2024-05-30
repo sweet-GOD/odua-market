@@ -31,7 +31,7 @@ const ProfileSidebar = ({ setActive, active }) => {
       });
   };
   return (
-    <div className="w-full text-gray-400 font-semibold bg-white shadow-2xl rounded md:h-[100%] h-20 md:p-8 p-4 flex md:flex-col justify-between items-center">
+    <div className="w-full text-gray-500 font-semibold bg-white shadow-2xl lg:rounded-box md:h-[100%] h-20 md:p-8 p-4 flex md:flex-col justify-between items-center">
       <div
         className="flex items-center cursor-pointer w-full mb-8"
         onClick={() => setActive(1)}

@@ -65,8 +65,8 @@ const ProductCard = ({ data, isEvent }) => {
 
   return (
     <>
-      <div className="w-full rounded bg-white shadow overflow-hidden md:shadow-xl pb-4 relative cursor-pointer">
-        <div className="flex justify-start items-center px-2 pt-3 gap-2 border-b">
+      <div className="w-full rounded   overflow-hidden  pb-4 relative cursor-pointer">
+        <div className="flex justify-start items-center px-2 pt-3 gap-2">
           <Link
             to={`/shop/preview/${data?.shop._id}`}
             className="flex  justify-center items-center"
@@ -76,7 +76,7 @@ const ProductCard = ({ data, isEvent }) => {
               src={data?.shop.avatar.url}
               alt=""
             />
-            <h5 className={`${styles.shop_name} text-green-600 pb-3 font-medium`}>
+            <h5 className={`${styles.shop_name} text-green-300 pb-3 font-medium`}>
               {data.shop.name}
             </h5>
           </Link>
@@ -86,7 +86,7 @@ const ProductCard = ({ data, isEvent }) => {
         >
           {data.shop.name}
         </h5>
-        <div className="relative border-b">
+        <div className="relative ">
           <Link
             to={`${
               isEvent === true
@@ -97,7 +97,7 @@ const ProductCard = ({ data, isEvent }) => {
             <img
               src={`${data.images && data.images[0]?.url}`}
               alt=""
-              className="w-full h-80 md:h-72 object-cover "
+              className="w-full h-80 md:h-72 rounded-btn object-cover "
             />
           </Link>
 
@@ -118,7 +118,7 @@ const ProductCard = ({ data, isEvent }) => {
                 : `/product/${data._id}`
             }`}
           >
-            <h4 className="pt-2 text-[#010101] text-md px-2 font-[700] hover:opacity-70 ">
+            <h4 className="pt-2 text-[#fff] text-md px-2 font-[700] hover:opacity-70 ">
               {data.name.length > 35
                 ? data.name.slice(0, 35) + "..."
                 : data.name}
@@ -147,7 +147,7 @@ const ProductCard = ({ data, isEvent }) => {
                     size={24}
                     className="cursor-pointer  "
                     onClick={() => removeFromWishlistHandler(data)}
-                    color={click ? "red" : "#010101"}
+                    color={click ? "red" : "#fff"}
                     title="Remove from wishlist"
                   />
                 ) : (
@@ -155,7 +155,7 @@ const ProductCard = ({ data, isEvent }) => {
                     size={24}
                     className="cursor-pointer  "
                     onClick={() => addToWishlistHandler(data)}
-                    color={click ? "red" : "#010101"}
+                    color={click ? "red" : "#fff"}
                     title="Add to wishlist"
                   />
                 )}
@@ -164,7 +164,7 @@ const ProductCard = ({ data, isEvent }) => {
                   size={24}
                   className="cursor-pointer  "
                   onClick={() => setOpen(!open)}
-                  color="#010101"
+                  color="#fff"
                   title="Quick view"
                 />
                 {open ? (
@@ -177,15 +177,15 @@ const ProductCard = ({ data, isEvent }) => {
           <button className="w-full  overflow-hidden">
             {data?.stock > 0 ? (
               <div
-                className="btn w-full hover:bg-[#333] rounded text-white bg-[#010101] cursor-pointer flex items-center justify-center"
+                className="btn w-full hover:bg-[#eee] rounded-btn text-[#010101] bg-[#fff] cursor-pointer flex items-center justify-center"
                 onClick={() => addToCartHandler(data._id)}
               >
                 Add to Cart
-                <BsCartPlus
+                {/* <BsCartPlus
                   size={18}
-                  color="#fff"
+                  color="#010101"
                   // title="Add to cart"
-                />
+                /> */}
               </div>
             ) : (
               <div
