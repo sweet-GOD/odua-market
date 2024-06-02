@@ -205,8 +205,9 @@ const SellerHeader = ({ activeHeading }) => {
             </Link>
           </div>
           <div>
+            <div className="text-[#999] mr-[20px]">Seller</div>
             <div
-              className="relative mr-[20px]"
+              className="relative hidden mr-[20px]"
               onClick={() => setOpenCart(true)}
             >
               <AiOutlineShoppingCart size={30} className="text-[#fff]" />
@@ -227,7 +228,7 @@ const SellerHeader = ({ activeHeading }) => {
               <div className="w-full justify-between flex pr-3">
                 <div>
                   <div
-                    className="relative mr-[15px]"
+                    className="relative hidden mr-[15px]"
                     onClick={() => setOpenWishlist(true) || setOpen(false)}
                   >
                     <AiOutlineHeart size={30} className="mt-5 ml-3" />
@@ -244,16 +245,16 @@ const SellerHeader = ({ activeHeading }) => {
               </div>
 
               <div className="flex w-full py-4 mb-4 px-4 justify-start border-b">
-                {isAuthenticated ? (
+                {isSeller ? (
                   <div>
                     <Link to="/profile" className="flex items-center gap-2">
                       <img
-                        src={`${user.avatar?.url}`}
+                        src={`${seller.avatar?.url}`}
                         alt=""
-                        className="w-[32px] h-[32px] rounded-full border-[3px] border-[#ffde59]"
+                        className="w-[35px] h-[35px] rounded-full border-[3px] border-[#ffde59]"
                       />
                       <p className="text-[#010101] font-semibold">
-                        {user.name}
+                        {seller.name}
                       </p>
                     </Link>
                   </div>
@@ -261,7 +262,7 @@ const SellerHeader = ({ activeHeading }) => {
                   <div>
                     <Link
                       to="/login"
-                      className="text-[18px] pr-[10px] font-semibold text-[#000000b7]"
+                      className="text-[18px] pr-[10px] font-semibold hidden text-[#000000b7]"
                     >
                       Login /
                     </Link>
@@ -317,7 +318,7 @@ const SellerHeader = ({ activeHeading }) => {
                 </Link>
               </div> */}
 
-              <div className={`${styles.button} ml-4 shadow-lg`}>
+              <div className={`${styles.button} ml-4 shadow-lg hidden`}>
                 <Link to={`${isSeller ? "/dashboard" : "/shop-create"}`}>
                   <h1 className="text-[#fff] flex items-center ">
                     {isSeller ? "Go to Dashboard" : "Become a seller"}{" "}

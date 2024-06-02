@@ -34,7 +34,7 @@ const DashboardHero = () => {
     <div className="w-full p-8 text-white">
       <h3 className="text-[26px] my-4 font-Poppins pb-2">Overview</h3>
       <div className="w-full block 800px:flex items-center justify-between">
-        <div className="w-full mb-4 800px:w-[30%] min-h-[20vh] backdrop-blur bg-[#ffffff3b] shadow rounded-box p-6">
+        <div className="w-full mb-4 800px:w-[30%] min-h-[20vh] bg-gray-900  shadow rounded-box p-6">
           <div className="flex  items-center">
             {/* <AiOutlineMoneyCollect
               size={30}
@@ -54,7 +54,7 @@ const DashboardHero = () => {
           </Link>
         </div>
 
-        <div className="w-full mb-4 800px:w-[30%] min-h-[20vh] backdrop-blur bg-[#ffffff3b] shadow rounded-box p-6">
+        <div className="w-full mb-4 800px:w-[30%] min-h-[20vh] bg-gray-900  shadow rounded-box p-6">
           <div className="flex  items-center">
             
             <h3
@@ -69,7 +69,7 @@ const DashboardHero = () => {
           </Link>
         </div>
 
-        <div className="w-full mb-4 800px:w-[30%] min-h-[20vh] backdrop-blur bg-[#ffffff3b] shadow rounded-box p-6">
+        <div className="w-full mb-4 800px:w-[30%] min-h-[20vh] bg-gray-900  shadow rounded-box p-6">
           <div className="flex  items-center">
             {/* <AiOutlineMoneyCollect
               size={30}
@@ -90,13 +90,13 @@ const DashboardHero = () => {
       </div>
       <br />
       <h3 className="text-[26px] my-4 font-Poppins pb-2">Latest Orders</h3>
-      <div className="w-full min-h-[45vh] backdrop-blur bg-[#ffffff3b] rounded-box">
+      <div className="w-full min-h-[45vh] bg-gray-900  rounded-box">
       {latestOrders && latestOrders.length > 0 ? (
           latestOrders.map((order) => (
             <div key={order.id} className="flex justify-between items-center mb-4 p-4 rounded-lg shadow">
               <div>
                 <h4 className="font-semibold">Order ID: {order.id}</h4>
-                <p>Status: <span className={order.status === "Delivered" ? "text-green-600" : "text-red-600"}>{order.status}</span></p>
+                <p>Status: <span className={order.status === "Delivered" ? "text-green-400" : "text-red-400"}>{order.status}</span></p>
                 <p>Items Qty: {order.itemsQty}</p>
                 <p>Total: {order.total}</p>
               </div>

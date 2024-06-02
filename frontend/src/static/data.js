@@ -281,74 +281,67 @@ export const sellerCategoriesData = [
     title: "Dashbord",
     url: "dashboard",
     image_Url:
-      require("../Assests/clothes.png"),
+      require("../Assests/dashboard.png"),
   },
   {
     id: 2,
     title: "Orders",
     url: "dashboard-orders",
     image_Url:
-      require("../Assests/necklace.png"),
+      require("../Assests/orders.png"),
   },
   {
     id: 3,
     title: "Products",
     url: "dashboard-products",
     image_Url:
-      require("../Assests/frame.png"),
+      require("../Assests/products.png"),
   },
   {
     id: 4,
     title: "Create product",
     url: "dashboard-create-product",
     image_Url:
-    require("../Assests/art-studies.png"),
+    require("../Assests/create-product.png"),
   },
   {
     id: 5,
     title: "Events",
     url: "dashboard-events",
-    image_Url: require("../Assests/dice.png"),
+    image_Url: require("../Assests/event.png"),
   },
   {
     id: 6,
     title: "Create event",
     url: "dashboard-create-event",
-    image_Url: require("../Assests/drum.png"),
+    image_Url: require("../Assests/create-event.png"),
   },
   {
     id: 7,
     title: "Withdraw money",
     url: "dashboard-withdraw-money",
     image_Url:
-    require("../Assests/artifact.png"),
+    require("../Assests/withdraw-money.png"),
   },
   {
     id: 8,
     title: "Inbox",
     url: "dashboard-messages",
     image_Url:
-      "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ae8a96c0-cb6f-4ad8-a7a0-5acd4a48713a/d5avujb-32bcaf51-32fd-4c74-b799-12987a3f297b.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FlOGE5NmMwLWNiNmYtNGFkOC1hN2EwLTVhY2Q0YTQ4NzEzYVwvZDVhdnVqYi0zMmJjYWY1MS0zMmZkLTRjNzQtYjc5OS0xMjk4N2EzZjI5N2IucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.EIRU_yo_cIaabvuLFfp6QiT3adrd_NWHh2eTcTHiGlE",
+      require("../Assests/inbox.png"),
   },
   {
     id: 9,
-    title: "Discount code",
+    title: "Discount coupoun",
     url: "dashboard-coupouns",
-    image_Url: "https://pngimg.com/d/suit_PNG93204.png",
+    image_Url: require("../Assests/discount-coupon.png"),
   },
   {
     id: 10,
     title: "Refunds",
     url: "dashboard-refunds",
     image_Url:
-    require("../Assests/skincare.png"),
-  },
-  {
-    id: 11,
-    title: "Settings",
-    url: "settings",
-    image_Url:
-    require("../Assests/herbs.png"),
+    require("../Assests/refund.png"),
   },
   
 ];

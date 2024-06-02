@@ -9,7 +9,7 @@ const ShopDashboardPage = () => {
         <div className="profilebg overflow-hidden">
           <SellerHeader />
           {/* <DashboardHeader /> */}
-          <div className="flex items-start justify-between w-full mt-10 lg:mt-0  mx-auto">
+          <div className="flex items-start justify-between w-full mt-10 lg:mt-0 lg:px-10 mx-auto">
             <div className="w-[80px] 800px:w-[330px] hidden">
               <DashboardSideBar active={1} />
             </div>
