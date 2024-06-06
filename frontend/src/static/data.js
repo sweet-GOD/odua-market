@@ -254,10 +254,10 @@ export const categoriesData = [
   },
   {
     id: 10,
-    title: "Cosmetics & Body Care",
+    title: "Vehicles",
     subTitle: "",
     image_Url:
-    require("../Assests/skincare.png"),
+    require("../Assests/car.png"),
   },
   {
     id: 11,

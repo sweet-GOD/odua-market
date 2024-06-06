@@ -10,17 +10,18 @@ const ShuffleHero = () => {
         //   "url(https://images.wallpaperscraft.com/image/single/skyscrapers_buildings_sky_196848_1920x1080.jpg)",
       }}>
 
-    <section className="w-full px-8 md:px-32  md:rounded-2xl  md:py-20 pt-8  grid grid-cols-1  md:grid-cols-2 items-center md:gap-24 gap-12 max-w-8xl mx-auto">
+    <section className="w-full px-8 md:px-20  md:rounded-2xl  md:py-16 pt-8  grid grid-cols-1  md:grid-cols-2 items-center md:gap-24 gap-12 max-w-8xl mx-auto">
       <div>
         {/* <span className="block mb-4 text-xs md:text-sm text-[#010101] font-medium">
         Your Trusted Marketplace 
         </span> */}
-        <h3 className="text-6xl md:text-7xl   font-black multicolor-text">
-        Discover the Essence of Africa
-        </h3>
-        <p className="text-xl md:text-lg text-white my-8 md:my-8 font-semibold">
-        Embrace the beauty, culture, and craftmanship of African-made products, handcrafted with love and tradition.
-        </p>
+        <h3 className="text-6xl md:text-6xl font-medium multicolor-text">
+    Odua Market is online 24/7!
+</h3>
+<p className="text-xl md:text-lg text-white my-8 md:my-8 font-light">
+Experience the convenience and joy of shopping on a decentralized platform that connects you with sellers from around Nigeria.
+</p>
+
         <button className="bg-[#fff]   w-full text-[#010101]  font-bold text-lg mt-8 py-4 px-14 rounded-btn transition-all hover:opacity-90  active:scale-95">
           <span className="multicolor-text">
 
@@ -125,7 +126,7 @@ const generateSquares = () => {
       key={sq.id}
       layout
       transition={{ duration: 1.5, type: "spring" }}
-      className="w-full h-full rounded-btn "
+      className="w-full h-full  "
       style={{
         backgroundImage: `url(${sq.src})`,
         backgroundSize: "cover",

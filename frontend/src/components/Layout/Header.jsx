@@ -57,7 +57,7 @@ const Header = ({ activeHeading }) => {
 
   return (
     <>
-      <div className={`${styles.section}  p-1 z-10`}>
+      <div className={`${styles.section} p-1 z-10`}>
         <div className="hidden 800px:py-[0px] 800px:flex items-center justify-between">
           <div>
             <Link to="/">
@@ -66,23 +66,37 @@ const Header = ({ activeHeading }) => {
           </div>
           <h1 className="text font-bold  multicolor-text">PLACE ADVERTS HERE!!!</h1>
 
-          <div
-            className={`${styles.button} bg-white hover:opacity-80 transition ease-in-out duration-300 shadow-lg !h-11`}
-          >
-            <Link to={`${isSeller ? "/dashboard" : "/shop-create"}`}>
-              <h1 className="text-[#010101] flex uppercase text-sm items-center font-semibold">
-                {isSeller ? "My Dashboard" : "Go to seller mode"}{" "}
-                {/* <IoIosArrowForward className="ml-1" /> */}
-              </h1>
-            </Link>
+          <div className="flex">
+
+
+            <div
+              className={`${styles.button} bg-white hover:opacity-80 transition ease-in-out duration-300 shadow-lg !h-11`}
+            >
+              <Link to={`${isSeller ? "/dashboard" : "/shop-create"}`}>
+                <h1 className="text-[#010101] flex uppercase text-sm items-center font-semibold">
+                  {isSeller ? "My Dashboard" : "Go to seller mode"}{" "}
+                  {/* <IoIosArrowForward className="ml-1" /> */}
+                </h1>
+              </Link>
+            </div>
+
+            <div
+              className={`${styles.button} hover:opacity-80 transition ease-in-out duration-300 shadow-lg !h-11`}
+            >
+              <Link to={`${isSeller ? "/dashboard" : "/shop-create"}`}>
+                <h1 className="text-[#fff] flex  text-sm items-center ">
+                  {isSeller ? "0xa45....55" : "Connect Wallet"}{" "}
+                  {/* <IoIosArrowForward className="ml-1" /> */}
+                </h1>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
 
       <div
-        className={`${
-          active === true ? " fixed top-0 left-0  bg-[#010101f5]" : "bg-[#222]"
-        } transition hidden  800px:flex items-center justify-between z-20 w-full  h-[60px]`}
+        className={`${active === true ? " fixed top-0 left-0  bg-[#010101f5]" : "bg-[#222]"
+          } transition hidden  800px:flex items-center justify-between z-20 w-full  h-[60px]`}
       >
         <div
           className={`${styles.section} relative ${styles.noramlFlex} justify-start`}
@@ -128,8 +142,8 @@ const Header = ({ activeHeading }) => {
                 className="absolute left-4 top-2  pr-2 cursor-pointer text-[#010101]"
               />
               {searchTerm.trim() !== "" &&
-              searchData &&
-              searchData.length !== 0 ? (
+                searchData &&
+                searchData.length !== 0 ? (
                 <div className="absolute min-h-[30vh] backdrop-blur-2xl bg-[#ffffff9c] shadow-sm-2 z-[9] p-4 rounded-lg shadow-xl  mt-4 w-full">
                   {searchData &&
                     searchData.map((i, index) => {
@@ -153,88 +167,87 @@ const Header = ({ activeHeading }) => {
 
           <div className="flex w-full justify-between">
 
-          {/* navitems */}
-          <div className={`${styles.noramlFlex}`}>
-            <Navbar active={activeHeading} />
-          </div>
+            {/* navitems */}
+            <div className={`${styles.noramlFlex}`}>
+              <Navbar active={activeHeading} />
+            </div>
 
-          <div className="flex">
-          <div className={`${styles.noramlFlex}`}>
-              <div
-                data-tip={user ? user.email : "Profile"}
-                className="relative tooltip tooltip-bottom cursor-pointer hover:text-white mr-[15px]"
-              >
-                {isAuthenticated ? (
-                  <Link to="/profile">
-                    <img
-                      src={`${user?.avatar?.url}`}
-                      className="w-[35px] h-[35px] rounded-full"
-                      alt=""
-                    />
-                  </Link>
-                ) : (
-                  <>
-                    <CgProfile onClick={() => setOpenProfile(!openProfile)} size={26} color="rgb(255 255 255 / 99%)" />
-                  {openProfile && 
-                    <div className="z-10 absolute bg-white w-64 right-0 mt-6 shadow-2xl flex flex-col gap-1 p-1 rounded-xl rounded-tr-none">
-                    <Link className="btn bg-transparent border-0 font-bold " to={"/sign-up"}>Sign Up</Link>
+            <div className="flex">
+              <div className={`${styles.noramlFlex}`}>
+                <div
+                  data-tip={user ? user.email : "Profile"}
+                  className="relative tooltip tooltip-bottom cursor-pointer hover:text-white mr-[15px]"
+                >
+                  {isAuthenticated ? (
+                    <Link to="/profile">
+                      <img
+                        src={`${user?.avatar?.url}`}
+                        className="w-[35px] h-[35px] rounded-full"
+                        alt=""
+                      />
+                    </Link>
+                  ) : (
+                    <>
+                      <CgProfile onClick={() => setOpenProfile(!openProfile)} size={26} color="rgb(255 255 255 / 99%)" />
+                      {openProfile &&
+                        <div className="z-10 absolute bg-white w-64 right-0 mt-6 shadow-2xl flex flex-col gap-1 p-1 rounded-xl rounded-tr-none">
+                          <Link className="btn bg-transparent border-0 font-bold " to={"/sign-up"}>Sign Up</Link>
 
-                      <Link className="btn bg-[#010101] hover:bg-black text-white border-0 shadow-2xl " to={"/login"}>Log In</Link>
-                    </div> }
+                          <Link className="btn bg-[#010101] hover:bg-black text-white border-0 shadow-2xl " to={"/login"}>Log In</Link>
+                        </div>}
                     </>
-                )}
+                  )}
+                </div>
               </div>
-            </div>
 
-            <div className={`${styles.noramlFlex}`}>
-              <div
-                data-tip="Wishlist"
-                className="relative tooltip tooltip-bottom  cursor-pointer mr-[15px]"
-                onClick={() => setOpenWishlist(true)}
-              >
-                <AiOutlineHeart size={26} color="rgb(255 255 255 / 99%)" />
-                <span className="absolute right-0 top-0 rounded-full bg-[#fff] w-4 h-4 top right p-0 m-0 text-[#010101] font-mono text-[12px] leading-tight text-center">
-                  {wishlist && wishlist.length}
-                </span>
+              <div className={`${styles.noramlFlex}`}>
+                <div
+                  data-tip="Wishlist"
+                  className="relative tooltip tooltip-bottom  cursor-pointer mr-[15px]"
+                  onClick={() => setOpenWishlist(true)}
+                >
+                  <AiOutlineHeart size={26} color="rgb(255 255 255 / 99%)" />
+                  <span className="absolute right-0 top-0 rounded-full bg-[#fff] w-4 h-4 top right p-0 m-0 text-[#010101] font-mono text-[12px] leading-tight text-center">
+                    {wishlist && wishlist.length}
+                  </span>
+                </div>
               </div>
-            </div>
 
-            <div className={`${styles.noramlFlex}`}>
-              <div
-                data-tip="Cart"
-                className="relative tooltip tooltip-bottom cursor-pointer mr-[15px]"
-                onClick={() => setOpenCart(true)}
-              >
-                <AiOutlineShoppingCart
-                  size={26}
-                  color="rgb(255 255 255 / 99%)"
-                />
+              <div className={`${styles.noramlFlex}`}>
+                <div
+                  data-tip="Cart"
+                  className="relative tooltip tooltip-bottom cursor-pointer mr-[15px]"
+                  onClick={() => setOpenCart(true)}
+                >
+                  <AiOutlineShoppingCart
+                    size={26}
+                    color="rgb(255 255 255 / 99%)"
+                  />
 
-                <span className="absolute right-0 top-0 rounded-full bg-[#fff] w-4 h-4 top right p-0 m-0 text-[#010101] font-mono text-[12px] leading-tight text-center">
-                  {cart && cart.length}
-                </span>
+                  <span className="absolute right-0 top-0 rounded-full bg-[#fff] w-4 h-4 top right p-0 m-0 text-[#010101] font-mono text-[12px] leading-tight text-center">
+                    {cart && cart.length}
+                  </span>
+                </div>
               </div>
+
+
+
+              {/* cart popup */}
+              {openCart ? <Cart setOpenCart={setOpenCart} /> : null}
+
+              {/* wishlist popup */}
+              {openWishlist ? (
+                <Wishlist setOpenWishlist={setOpenWishlist} />
+              ) : null}
             </div>
-
-            
-
-            {/* cart popup */}
-            {openCart ? <Cart setOpenCart={setOpenCart} /> : null}
-
-            {/* wishlist popup */}
-            {openWishlist ? (
-              <Wishlist setOpenWishlist={setOpenWishlist} />
-            ) : null}
-          </div>
           </div>
         </div>
       </div>
 
       {/* mobile header */}
       <div
-        className={`${
-          active === true ? "shadow-sm  z-10 " : null
-        }
+        className={`${active === true ? "shadow-sm  z-10 " : null
+          }
       w-full h-[60px]  backdrop-blur-md z-50 fixed top-0 left-0 shadow-sm 800px:hidden`}
       >
         <div className="w-full flex items-center z-50 justify-between">
@@ -338,8 +351,8 @@ const Header = ({ activeHeading }) => {
                   onChange={handleSearchChange}
                 />
                 {searchTerm.trim() !== "" &&
-                searchData &&
-                searchData.length !== 0 ? (
+                  searchData &&
+                  searchData.length !== 0 ? (
                   <div className="absolute bg-[#fff] z-10 shadow-xl w-[99%] left-4 p-2 rounded-xl">
                     {searchData.map((i) => {
                       const d = i.name;
@@ -383,7 +396,7 @@ const Header = ({ activeHeading }) => {
               <br />
               <br />
 
-              
+
             </div>
           </div>
         )}
